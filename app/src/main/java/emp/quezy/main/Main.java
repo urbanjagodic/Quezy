@@ -9,12 +9,17 @@ import android.widget.ImageView;
 import emp.quezy.R;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
+import emp.quezy.other.ProximitySensorManager;
 
-public class Main extends AppCompatActivity {
+public class Main extends AppCompatActivity  {
 
 
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
+
+    //private SensorManager  mySensorManger;
+    //private Sensor myProximity;
+    //private static final int sensitivity = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,10 @@ public class Main extends AppCompatActivity {
         animateButtons();
         buttonAction();
 
+        ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
+
+        myProximityManager.initialize();
+        myProximityManager.register();
 
 
     }
@@ -98,5 +107,39 @@ public class Main extends AppCompatActivity {
         }
 
     }
+
+
+    /*
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySensorManger.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mySensorManger.registerListener(this, myProximity, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            if (sensorEvent.values[0] >= -sensitivity && sensorEvent.values[0] <= sensitivity) {
+                //near
+                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
+            } else {
+                //far
+                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+    */
 
 }
