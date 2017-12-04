@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 
 /**
@@ -46,14 +47,21 @@ public class ProximitySensorManager  implements SensorEventListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (sensorEvent.values[0] >= -sensitivity && sensorEvent.values[0] <= sensitivity) {
-                //near
-                HelperMethods.showToast(this.myActivity, "near device");
+
+                // close to device
+                HelperMethods.createDialog(myActivity, "Exit app", "Do you really wish to exit?", new DialogReturnCommand() {
+                    @Override
+                    public void finishIt() {
+                        if (!myActivity.isFinishing()) {
+                            HelperMethods.killApp(myActivity);
+                        }
+                    }
+                });
+
             } else {
-                //far
-                HelperMethods.showToast(this.myActivity, "far from device");
+                // far away from device
+                HelperMethods.showToast(this.myActivity, "far away from device");
             }
-
-
         }
 
     }

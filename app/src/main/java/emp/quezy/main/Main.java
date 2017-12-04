@@ -1,5 +1,6 @@
 package emp.quezy.main;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -16,10 +17,9 @@ public class Main extends AppCompatActivity  {
 
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
+    private Activity myActivity = Main.this;
 
-    //private SensorManager  mySensorManger;
-    //private Sensor myProximity;
-    //private static final int sensitivity = 4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,12 @@ public class Main extends AppCompatActivity  {
         animateButtons();
         buttonAction();
 
-        ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
 
+        ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
         myProximityManager.initialize();
         myProximityManager.register();
+
+
 
 
     }
@@ -45,6 +47,8 @@ public class Main extends AppCompatActivity  {
 
     public void buttonAction() {
         for (ImageView button : startButtons) {
+
+            button.setSoundEffectsEnabled(false);
 
             button.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -79,9 +83,12 @@ public class Main extends AppCompatActivity  {
                 }
 
             });
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    HelperMethods.playSound(Main.this, R.raw.click1);
 
                     switch (view.getId()) {
 
@@ -108,38 +115,5 @@ public class Main extends AppCompatActivity  {
 
     }
 
-
-    /*
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mySensorManger.unregisterListener(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mySensorManger.registerListener(this, myProximity, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        if (sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            if (sensorEvent.values[0] >= -sensitivity && sensorEvent.values[0] <= sensitivity) {
-                //near
-                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
-            } else {
-                //far
-                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
-    */
 
 }
