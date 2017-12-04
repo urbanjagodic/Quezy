@@ -1,7 +1,9 @@
 package emp.quezy.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,9 +43,22 @@ public class Main extends AppCompatActivity  {
 
 
 
+
     }
 
 
+
+    // voice command result
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+
+            String result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
+            HelperMethods.showToast(myActivity, result);
+        }
+    }
 
     public void buttonAction() {
         for (ImageView button : startButtons) {
@@ -109,11 +124,12 @@ public class Main extends AppCompatActivity  {
 
     public void animateButtons() {
         for (ImageView button : startButtons) {
-
             new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
         }
-
     }
+
+
+
 
 
 }
