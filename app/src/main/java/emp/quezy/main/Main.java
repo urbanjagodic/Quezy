@@ -1,6 +1,7 @@
 package emp.quezy.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -33,11 +34,11 @@ public class Main extends AppCompatActivity  {
         animateButtons();
         buttonAction();
 
-
+/*
         ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
         myProximityManager.initialize();
         myProximityManager.register();
-
+*/
 
 
 
@@ -82,7 +83,8 @@ public class Main extends AppCompatActivity  {
                     return  false;
                 }
 
-            });
+            }
+            );
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,7 +95,8 @@ public class Main extends AppCompatActivity  {
                     switch (view.getId()) {
 
                         case R.id.playButton:
-                            HelperMethods.showToast(Main.this, R.id.playButton + "");
+                            //HelperMethods.showToast(Main.this, R.id.playButton + "");
+                            startSelectQuiz();
                             break;
                         case R.id.settingsButton:
                             HelperMethods.showToast(Main.this, R.id.settingsButton + "");
@@ -105,6 +108,11 @@ public class Main extends AppCompatActivity  {
                 }
             });
         }
+    }
+
+    private void startSelectQuiz() {
+        final Intent selectQuiz = new Intent(myActivity, SelectQuiz.class);
+        startActivity(selectQuiz);
     }
 
     public void animateButtons() {
