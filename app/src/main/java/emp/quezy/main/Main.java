@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import emp.quezy.R;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
-import emp.quezy.other.ProximitySensorManager;
+import emp.quezy.quiz.SelectQuiz;
 
 public class Main extends AppCompatActivity  {
 

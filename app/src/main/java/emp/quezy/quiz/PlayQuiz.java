@@ -1,4 +1,4 @@
-package emp.quezy.main;
+package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import emp.quezy.R;
 
-public class Quiz extends AppCompatActivity {
+public class PlayQuiz extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        setContentView(R.layout.activity_play_quiz);
 
         TextView tx = findViewById(R.id.proba);
 
@@ -24,7 +24,12 @@ public class Quiz extends AppCompatActivity {
                 String dif = bnd.getString("emp.quezy.difficulty");
                 String nQ = bnd.getString("emp.quezy.num_questions");
 
-                String API = "https://opentdb.com/api.php?amount="+nQ+"&category="+cat+"&difficulty="+dif+"&type=multiple";
+                String API;
+                if (Integer.parseInt(cat) == 8) {
+                    API = "https://opentdb.com/api.php?amount="+nQ+"&difficulty="+dif+"&type=multiple";
+                } else {
+                    API = "https://opentdb.com/api.php?amount="+nQ+"&category="+cat+"&difficulty="+dif+"&type=multiple";
+                }
                 tx.setText(API);
             }
         }

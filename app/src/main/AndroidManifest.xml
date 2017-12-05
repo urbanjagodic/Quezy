@@ -38,8 +38,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".main.SelectQuiz" />
-        <activity android:name=".main.Quiz"></activity>
+        <activity android:name=".quiz.SelectQuiz" />
+        <activity android:name=".quiz.PlayQuiz"></activity>
     </application>
 
 </manifest>

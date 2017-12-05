@@ -19,7 +19,8 @@
         android:layout_centerInParent="false"
         android:layout_centerVertical="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentRight="false">
 
         <ImageView
             android:id="@+id/playButton"

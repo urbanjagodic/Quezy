@@ -1,4 +1,4 @@
-package emp.quezy.main;
+package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,7 +17,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import emp.quezy.R;
@@ -40,17 +39,19 @@ public class SelectQuiz extends AppCompatActivity {
 
         btnPlay = (Button) findViewById(R.id.buttonPlay);
 
+        btnPlay.setVisibility(View.GONE);
+
         fillSpiners();
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition()+9));
+                bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition()+8));
                 bundle.putString("emp.quezy.difficulty", spnDifficulty.getSelectedItem().toString());
                 bundle.putString("emp.quezy.num_questions", spnNumQuestions.getSelectedItem().toString());
 
-                Intent intent = new Intent(SelectQuiz.this, Quiz.class);
+                Intent intent = new Intent(SelectQuiz.this, PlayQuiz.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -60,6 +61,8 @@ public class SelectQuiz extends AppCompatActivity {
     }
 
     private void fillSpiners() {
+        hideView();
+
         new RetrieveFeedTask().execute();
 
         ArrayAdapter<CharSequence> adapterDiff = ArrayAdapter.createFromResource(this,
@@ -74,31 +77,10 @@ public class SelectQuiz extends AppCompatActivity {
 
     }
 
-    private void readCategories() {
 
-        String str = getResources().getString(R.string.jsonCategories);
-
-        try {
-            JSONObject jsonObject = new JSONObject(str);
-            JSONArray jsonArray = jsonObject.getJSONArray("trivia_categories");
-            String [] values = new String[jsonArray.length()];
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jObject = jsonArray.getJSONObject(i);
-                values[i] = jObject.getString("name");
-            }
-
-            ArrayAdapter<String> adapterQuestions = new ArrayAdapter<String>(SelectQuiz.this, android.R.layout.simple_spinner_item, values);
-            adapterQuestions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spnCategory.setAdapter(adapterQuestions);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
+    /**
+     * Reads and parses the JSON data for the categories
+     */
     private class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -131,20 +113,49 @@ public class SelectQuiz extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONArray jsonArray = jsonObject.getJSONArray("trivia_categories");
-                String [] values = new String[jsonArray.length()];
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jObject = jsonArray.getJSONObject(i);
+                String [] values = new String[jsonArray.length() + 1];
+                values[0] = "Any Category";
+                for (int i = 1; i <= jsonArray.length(); i++) {
+                    JSONObject jObject = jsonArray.getJSONObject(i-1);
                     values[i] = jObject.getString("name");
                 }
 
-                ArrayAdapter<String> adapterQuestions = new ArrayAdapter<String>(SelectQuiz.this, android.R.layout.simple_spinner_item, values);
+                ArrayAdapter<String> adapterQuestions = new ArrayAdapter<>(SelectQuiz.this, android.R.layout.simple_spinner_item, values);
                 adapterQuestions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spnCategory.setAdapter(adapterQuestions);
+                
+                showView();
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Hides all views on activity before categories are downloaded
+     */
+    private void hideView() {
+        spnDifficulty.setVisibility(View.GONE);
+        spnNumQuestions.setVisibility(View.GONE);
+        spnCategory.setVisibility(View.GONE);
+        btnPlay.setVisibility(View.GONE);
+        findViewById(R.id.textViewCat).setVisibility(View.GONE);
+        findViewById(R.id.textViewNumQ).setVisibility(View.GONE);
+        findViewById(R.id.textViewDif).setVisibility(View.GONE);
+    }
+
+    /**
+     * Makes all view visable after the categories were downloaded
+     */
+    private void showView() {
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        spnDifficulty.setVisibility(View.VISIBLE);
+        spnNumQuestions.setVisibility(View.VISIBLE);
+        spnCategory.setVisibility(View.VISIBLE);
+        btnPlay.setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewCat).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewNumQ).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewDif).setVisibility(View.VISIBLE);
     }
 }

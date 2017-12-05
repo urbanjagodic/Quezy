@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="emp.quezy.main.SelectQuiz">
+    android:background="@color/main_background_color"
+    tools:context="emp.quezy.quiz.SelectQuiz">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textViewCat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category" />
@@ -31,7 +32,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewDif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/difficulty" />
@@ -47,7 +48,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewNumQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/numQ" />
@@ -69,6 +70,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/play" />
         </TableRow>
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
 
     </TableLayout>
 
