@@ -2,12 +2,13 @@ package emp.quezy.other;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.speech.RecognizerIntent;
 
-import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 
 /**
@@ -48,22 +49,18 @@ public class ProximitySensorManager  implements SensorEventListener {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (sensorEvent.values[0] >= -sensitivity && sensorEvent.values[0] <= sensitivity) {
 
-                // close to device
-                HelperMethods.createDialog(myActivity, "Exit app", "Do you really wish to exit?", new DialogReturnCommand() {
-                    @Override
-                    public void finishIt() {
-                        if (!myActivity.isFinishing()) {
-                            HelperMethods.killApp(myActivity);
-                        }
-                    }
-                });
+                // close to the device
+                Intent myIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                myIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                //myIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "sl");
+                myIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Your wish is my command!");
+                myActivity.startActivityForResult(myIntent, 100);
 
             } else {
                 // far away from device
                 HelperMethods.showToast(this.myActivity, "far away from device");
             }
         }
-
     }
 
     @Override
