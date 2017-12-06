@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import org.json.JSONArray;
@@ -27,6 +28,7 @@ public class SelectQuiz extends AppCompatActivity {
     Spinner spnNumQuestions;
     Spinner spnCategory;
     Button btnPlay;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

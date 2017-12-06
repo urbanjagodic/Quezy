@@ -11,4 +11,7 @@
 
     <color name="main_background_color">#80bfff</color>
     <color name="startup_icon_color">#990e0e</color>
+
+
+    <color name="progress_bar_color"> #ffffff</color>
 </resources>

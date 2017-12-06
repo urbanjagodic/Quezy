@@ -18,4 +18,8 @@
         <item>25</item>
     </string-array>
 
+
+
+    <string name="loading_data_text"> Loading data</string>
+
 </resources>
