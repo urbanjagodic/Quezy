@@ -65,7 +65,7 @@ public class SelectQuiz extends AppCompatActivity {
     private void fillSpiners() {
         hideView();
 
-        new RetrieveFeedTask().execute();
+        new RetrieveCategories().execute();
 
         ArrayAdapter<CharSequence> adapterDiff = ArrayAdapter.createFromResource(this,
                 R.array.difficulty_array, android.R.layout.simple_spinner_item);
@@ -83,7 +83,7 @@ public class SelectQuiz extends AppCompatActivity {
     /**
      * Reads and parses the JSON data for the categories
      */
-    private class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+    private class RetrieveCategories extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... voids) {

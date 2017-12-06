@@ -12,15 +12,14 @@ import android.widget.ImageView;
 import emp.quezy.R;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
+import emp.quezy.other.ProximitySensorManager;
 import emp.quezy.quiz.SelectQuiz;
 
 public class Main extends AppCompatActivity  {
 
-
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
-
 
 
     @Override
@@ -35,14 +34,9 @@ public class Main extends AppCompatActivity  {
         animateButtons();
         buttonAction();
 
-/*
         ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
         myProximityManager.initialize();
         myProximityManager.register();
-*/
-
-
-
 
     }
 
