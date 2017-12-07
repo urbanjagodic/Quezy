@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import emp.quezy.R;
+import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
 import emp.quezy.other.ProximitySensorManager;
+import emp.quezy.other.VoiceCommands;
 import emp.quezy.quiz.SelectQuiz;
+import emp.quezy.settings.Settings;
 
 public class Main extends AppCompatActivity {
 
@@ -43,16 +46,39 @@ public class Main extends AppCompatActivity {
     }
 
 
-    // voice command result
+    // string voice command result and executed task
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 100 && resultCode == RESULT_OK) {
 
+            VoiceCommands.initialize();
+
             String result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
-            HelperMethods.showToast(myActivity, result);
+            //HelperMethods.showToast(myActivity, result);
+
+            if (VoiceCommands.exitCommands.contains(result)) {
+                HelperMethods.killApp(myActivity);
+            } else if (VoiceCommands.settingsCommands.contains(result)) {
+                startSettings();
+            } else if (VoiceCommands.infoCommands.contains(result)) {
+                //startInfo():
+            } else if (VoiceCommands.playCommands.contains(result)) {
+                startSelectQuiz();
+            }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        HelperMethods.createDialog(myActivity, "Exit the application", "Are you sure?", new DialogReturnCommand() {
+            @Override
+            public void finishIt() {
+                HelperMethods.killApp(myActivity);
+            }
+        });
     }
 
     public void buttonAction() {
@@ -64,35 +90,35 @@ public class Main extends AppCompatActivity {
                                           @Override
                                           public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                                              if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                                                  switch (view.getId()) {
-                                                      case R.id.playButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
-                                                          break;
-                                                      case R.id.settingsButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
-                                                          break;
-                                                      case R.id.infoButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
-                                                          break;
-                                                  }
-                                              } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                                                  switch (view.getId()) {
-                                                      case R.id.playButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.play_image);
-                                                          break;
-                                                      case R.id.settingsButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.settings_image);
-                                                          break;
-                                                      case R.id.infoButton:
-                                                          ((ImageView) view).setImageResource(R.drawable.info_image);
-                                                          break;
-                                                  }
-                                              }
-                                              return false;
-                                          }
+                  if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                      switch (view.getId()) {
+                          case R.id.playButton:
+                              ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
+                              break;
+                          case R.id.settingsButton:
+                              ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
+                              break;
+                          case R.id.infoButton:
+                              ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
+                              break;
+                      }
+                  } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                      switch (view.getId()) {
+                          case R.id.playButton:
+                              ((ImageView) view).setImageResource(R.drawable.play_image);
+                              break;
+                          case R.id.settingsButton:
+                              ((ImageView) view).setImageResource(R.drawable.settings_image);
+                              break;
+                          case R.id.infoButton:
+                              ((ImageView) view).setImageResource(R.drawable.info_image);
+                              break;
+                      }
+                  }
+                  return false;
+              }
 
-                                      }
+          }
             );
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +133,7 @@ public class Main extends AppCompatActivity {
                             startSelectQuiz();
                             break;
                         case R.id.settingsButton:
-                            HelperMethods.showToast(Main.this, R.id.settingsButton + "");
+                            startSettings();
                             break;
                         case R.id.infoButton:
                             HelperMethods.showToast(Main.this, R.id.infoButton + "");
@@ -122,6 +148,12 @@ public class Main extends AppCompatActivity {
         final Intent selectQuiz = new Intent(myActivity, SelectQuiz.class);
         startActivity(selectQuiz);
     }
+
+    private void startSettings() {
+        Intent startSettings = new Intent(myActivity, Settings.class);
+        startActivity(startSettings);
+    }
+
 
     public void animateButtons() {
         for (ImageView button : startButtons) {
