@@ -7,7 +7,6 @@ package emp.quezy.other;
 public class VoiceCommands {
 
 
-
     private static String[] playCommands = {
 
             "play", "play the game", "start the game", "start to play", "play game",
@@ -31,7 +30,6 @@ public class VoiceCommands {
 
             "exit", "exit the app", "exit the application", "close the app", "close the application", "close app"
     };
-
 
 
 }

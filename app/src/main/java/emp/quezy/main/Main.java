@@ -12,15 +12,15 @@ import android.widget.ImageView;
 import emp.quezy.R;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
+import emp.quezy.other.ProximitySensorManager;
 import emp.quezy.quiz.SelectQuiz;
 
-public class Main extends AppCompatActivity  {
+public class Main extends AppCompatActivity {
 
 
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
-
 
 
     @Override
@@ -35,17 +35,12 @@ public class Main extends AppCompatActivity  {
         animateButtons();
         buttonAction();
 
-/*
+
         ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
         myProximityManager.initialize();
         myProximityManager.register();
-*/
-
-
-
 
     }
-
 
 
     // voice command result
@@ -66,38 +61,38 @@ public class Main extends AppCompatActivity  {
             button.setSoundEffectsEnabled(false);
 
             button.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
+                                          @Override
+                                          public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        switch (view.getId()) {
-                            case R.id.playButton:
-                                ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
-                                break;
-                            case R.id.settingsButton:
-                                ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
-                                break;
-                            case R.id.infoButton:
-                                ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
-                                break;
-                        }
-                    } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                        switch (view.getId()) {
-                            case R.id.playButton:
-                                ((ImageView) view).setImageResource(R.drawable.play_image);
-                                break;
-                            case R.id.settingsButton:
-                                ((ImageView) view).setImageResource(R.drawable.settings_image);
-                                break;
-                            case R.id.infoButton:
-                                ((ImageView) view).setImageResource(R.drawable.info_image);
-                                break;
-                        }
-                    }
-                    return  false;
-                }
+                                              if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                                                  switch (view.getId()) {
+                                                      case R.id.playButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
+                                                          break;
+                                                      case R.id.settingsButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
+                                                          break;
+                                                      case R.id.infoButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
+                                                          break;
+                                                  }
+                                              } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                                                  switch (view.getId()) {
+                                                      case R.id.playButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.play_image);
+                                                          break;
+                                                      case R.id.settingsButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.settings_image);
+                                                          break;
+                                                      case R.id.infoButton:
+                                                          ((ImageView) view).setImageResource(R.drawable.info_image);
+                                                          break;
+                                                  }
+                                              }
+                                              return false;
+                                          }
 
-            }
+                                      }
             );
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +104,6 @@ public class Main extends AppCompatActivity  {
                     switch (view.getId()) {
 
                         case R.id.playButton:
-                            //HelperMethods.showToast(Main.this, R.id.playButton + "");
                             startSelectQuiz();
                             break;
                         case R.id.settingsButton:
@@ -134,9 +128,6 @@ public class Main extends AppCompatActivity  {
             new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
         }
     }
-
-
-
 
 
 }

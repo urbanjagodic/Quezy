@@ -26,8 +26,7 @@ public class HelperMethods {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             myBuilder = new AlertDialog.Builder(myActivity, android.R.style.Theme_Material_Dialog_Alert);
-        }
-        else {
+        } else {
             myBuilder = new AlertDialog.Builder(myActivity);
         }
 
@@ -56,11 +55,10 @@ public class HelperMethods {
 
 
     public static void playSound(Activity myActivity, int resource) {
-        try{
-           MediaPlayer myPlayer = MediaPlayer.create(myActivity, resource);
-           myPlayer.start();
-        }
-        catch (Exception e) {
+        try {
+            MediaPlayer myPlayer = MediaPlayer.create(myActivity, resource);
+            myPlayer.start();
+        } catch (Exception e) {
             Log.d("exception", e.getMessage() + "");
         }
     }
