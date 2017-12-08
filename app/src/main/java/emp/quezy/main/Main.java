@@ -20,11 +20,9 @@ import emp.quezy.settings.Settings;
 
 public class Main extends AppCompatActivity {
 
-
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
