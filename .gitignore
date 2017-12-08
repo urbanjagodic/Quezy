@@ -8,3 +8,4 @@
 .externalNativeBuild
 .idea/gradle.xml
 app/app.iml
+app/local.properties
