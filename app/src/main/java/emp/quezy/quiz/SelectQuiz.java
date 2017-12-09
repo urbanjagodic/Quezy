@@ -2,8 +2,8 @@ package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,8 +41,6 @@ public class SelectQuiz extends AppCompatActivity {
 
         btnPlay = findViewById(R.id.buttonPlay);
 
-        btnPlay.setVisibility(View.GONE);
-
         fillSpiners();
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +61,7 @@ public class SelectQuiz extends AppCompatActivity {
     }
 
     private void fillSpiners() {
-        hideView();
-
-        new RetrieveFeedTask().execute();
+        new ReadJSON().execute();
 
         ArrayAdapter<CharSequence> adapterDiff = ArrayAdapter.createFromResource(this,
                 R.array.difficulty_array, android.R.layout.simple_spinner_item);
@@ -83,7 +79,13 @@ public class SelectQuiz extends AppCompatActivity {
     /**
      * Reads and parses the JSON data for the categories
      */
-    private class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+    private class ReadJSON extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            hideView();
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -158,4 +160,5 @@ public class SelectQuiz extends AppCompatActivity {
         findViewById(R.id.textViewNumQ).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewDif).setVisibility(View.VISIBLE);
     }
+
 }
