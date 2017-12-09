@@ -74,6 +74,12 @@ public class Main extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myProximityManager.unregister();
+    }
+
     // string voice command result and executed task
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
