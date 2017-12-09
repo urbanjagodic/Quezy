@@ -2,8 +2,8 @@ package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,13 +35,11 @@ public class SelectQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_quiz);
 
-        spnDifficulty = (Spinner) findViewById(R.id.spinnerDifficulty);
-        spnNumQuestions = (Spinner) findViewById(R.id.spinnerNumQuestions);
-        spnCategory = (Spinner) findViewById(R.id.spinnerCategory);
+        spnDifficulty = findViewById(R.id.spinnerDifficulty);
+        spnNumQuestions = findViewById(R.id.spinnerNumQuestions);
+        spnCategory = findViewById(R.id.spinnerCategory);
 
-        btnPlay = (Button) findViewById(R.id.buttonPlay);
-
-        btnPlay.setVisibility(View.GONE);
+        btnPlay = findViewById(R.id.buttonPlay);
 
         fillSpiners();
 
@@ -49,7 +47,7 @@ public class SelectQuiz extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition()+8));
+                bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition() + 8));
                 bundle.putString("emp.quezy.difficulty", spnDifficulty.getSelectedItem().toString());
                 bundle.putString("emp.quezy.num_questions", spnNumQuestions.getSelectedItem().toString());
 
@@ -63,9 +61,13 @@ public class SelectQuiz extends AppCompatActivity {
     }
 
     private void fillSpiners() {
+<<<<<<< HEAD
         hideView();
 
         new RetrieveCategories().execute();
+=======
+        new ReadJSON().execute();
+>>>>>>> b70ef0919d7e122fe68d3fb5aaae41bff238e6dc
 
         ArrayAdapter<CharSequence> adapterDiff = ArrayAdapter.createFromResource(this,
                 R.array.difficulty_array, android.R.layout.simple_spinner_item);
@@ -83,7 +85,17 @@ public class SelectQuiz extends AppCompatActivity {
     /**
      * Reads and parses the JSON data for the categories
      */
+<<<<<<< HEAD
     private class RetrieveCategories extends AsyncTask<Void, Void, String> {
+=======
+    private class ReadJSON extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            hideView();
+        }
+>>>>>>> b70ef0919d7e122fe68d3fb5aaae41bff238e6dc
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -99,33 +111,31 @@ public class SelectQuiz extends AppCompatActivity {
                     }
                     bufferedReader.close();
                     return stringBuilder.toString();
-                }
-                finally{
+                } finally {
                     urlConnection.disconnect();
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 Log.e("ERROR", e.getMessage(), e);
                 return null;
             }
         }
 
-        protected void onPostExecute(String response){
+        protected void onPostExecute(String response) {
 
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONArray jsonArray = jsonObject.getJSONArray("trivia_categories");
-                String [] values = new String[jsonArray.length() + 1];
+                String[] values = new String[jsonArray.length() + 1];
                 values[0] = "Any Category";
                 for (int i = 1; i <= jsonArray.length(); i++) {
-                    JSONObject jObject = jsonArray.getJSONObject(i-1);
+                    JSONObject jObject = jsonArray.getJSONObject(i - 1);
                     values[i] = jObject.getString("name");
                 }
 
                 ArrayAdapter<String> adapterQuestions = new ArrayAdapter<>(SelectQuiz.this, android.R.layout.simple_spinner_item, values);
                 adapterQuestions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spnCategory.setAdapter(adapterQuestions);
-                
+
                 showView();
 
             } catch (JSONException e) {
@@ -148,7 +158,7 @@ public class SelectQuiz extends AppCompatActivity {
     }
 
     /**
-     * Makes all view visable after the categories were downloaded
+     * Makes all view visible after the categories were downloaded
      */
     private void showView() {
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -160,4 +170,5 @@ public class SelectQuiz extends AppCompatActivity {
         findViewById(R.id.textViewNumQ).setVisibility(View.VISIBLE);
         findViewById(R.id.textViewDif).setVisibility(View.VISIBLE);
     }
+
 }

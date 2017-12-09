@@ -15,9 +15,9 @@ import emp.quezy.helper.HelperMethods;
  * Created by Urban on 3. 12. 2017.
  */
 
-public class ProximitySensorManager  implements SensorEventListener {
+public class ProximitySensorManager implements SensorEventListener {
 
-    private SensorManager  mySensorManger;
+    private SensorManager mySensorManger;
     private Sensor myProximity;
     private static final int sensitivity = 5;
 

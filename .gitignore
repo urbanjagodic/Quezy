@@ -6,7 +6,6 @@
 /build
 /captures
 .externalNativeBuild
-gradle.properties
 .idea/gradle.xml
 app/app.iml
 app/local.properties

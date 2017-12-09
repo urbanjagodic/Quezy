@@ -37,7 +37,7 @@ public class SplashScreen extends AppCompatActivity {
                     index = 0;
                 }
                 Log.d("tick", millisUntilFinished + "");
-                for (int i = 0; i < circles.length ; i++) {
+                for (int i = 0; i < circles.length; i++) {
                     if (i == index) {
                         continue;
                     }
@@ -45,6 +45,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
                 circles[index++].setColorFilter(R.color.splash_screen_circle);
             }
+
             public void onFinish() {
                 startActivity(new Intent(SplashScreen.this, Main.class));
                 finish();

@@ -6,6 +6,6 @@ package emp.quezy.helper;
 
 public interface DialogReturnCommand {
 
-     // used as a passing argument to a method
-     void finishIt();
+    // used as a passing argument to a method
+    void finishIt();
 }
