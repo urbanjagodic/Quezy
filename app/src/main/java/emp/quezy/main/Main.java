@@ -21,17 +21,16 @@ import emp.quezy.other.VoiceCommands;
 import emp.quezy.quiz.SelectQuiz;
 import emp.quezy.settings.Settings;
 
-public class Main extends AppCompatActivity {
 
+public class Main extends AppCompatActivity {
 
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
 
+
     private ProximitySensorManager myProximityManager;
     private TextToSpeech mySpeech;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +42,7 @@ public class Main extends AppCompatActivity {
 
         animateButtons();
         buttonAction();
+
 
         // initialize myproximity manager
         myProximityManager = new ProximitySensorManager(myActivity);
