@@ -42,6 +42,8 @@
         <activity android:name=".quiz.PlayQuiz"/>
         <activity android:name=".settings.Settings">
         </activity>
+        <activity android:name=".settings.VoiceControl">
+        </activity>
     </application>
 
 </manifest>

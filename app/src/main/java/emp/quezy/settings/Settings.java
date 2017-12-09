@@ -1,6 +1,7 @@
 package emp.quezy.settings;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,14 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import emp.quezy.R;
-import emp.quezy.helper.HelperMethods;
 
 public class Settings extends AppCompatActivity {
 
 
 
     private ListView myListView;
-
     private Activity myActivity = Settings.this;
 
     @Override
@@ -43,10 +42,18 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                HelperMethods.showToast(myActivity, adapterView.getItemAtPosition(i).toString());
+                if (i == 0) {
+                    openVoiceControlActivity();
+                }
+
             }
         });
 
 
+    }
+
+    public void openVoiceControlActivity() {
+        Intent myIntent = new Intent(myActivity, VoiceControl.class);
+        startActivity(myIntent);
     }
 }
