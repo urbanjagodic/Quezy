@@ -2,8 +2,10 @@ package emp.quezy.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import emp.quezy.R;
 import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
+import emp.quezy.other.ContentStore;
 import emp.quezy.other.MyAnimation;
 import emp.quezy.other.ProximitySensorManager;
 import emp.quezy.other.VoiceCommands;
@@ -24,6 +27,9 @@ public class Main extends AppCompatActivity {
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
+
+    private ProximitySensorManager myProximityManager;
+    private TextToSpeech mySpeech;
 
 
     @Override
@@ -38,11 +44,33 @@ public class Main extends AppCompatActivity {
         animateButtons();
         buttonAction();
 
-
-        ProximitySensorManager myProximityManager = new ProximitySensorManager(Main.this);
+        // initialize myproximity manager
+        myProximityManager = new ProximitySensorManager(myActivity);
         myProximityManager.initialize();
-        myProximityManager.register();
 
+
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // enable or disable myproximity manager regarding boolean value from shared prefs
+        ContentStore.initialize(myActivity);
+        SharedPreferences myPrefs = ContentStore.getMyPrefrences();
+        Object enableVoiceControl = myPrefs.getBoolean("voiceControl", false);
+
+        if (enableVoiceControl != null) {
+            if ((boolean)enableVoiceControl) {
+                myProximityManager.register();
+            }
+            else {
+                myProximityManager.unregister();
+            }
+        }
     }
 
 
@@ -73,7 +101,8 @@ public class Main extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        HelperMethods.createDialog(myActivity, "Exit the application", "Are you sure?", new DialogReturnCommand() {
+        HelperMethods.createDialog(myActivity, "Exit the application", "Are you sure?", "Yes", "No",
+                new DialogReturnCommand() {
             @Override
             public void finishIt() {
                 HelperMethods.killApp(myActivity);
@@ -118,8 +147,7 @@ public class Main extends AppCompatActivity {
                   return false;
               }
 
-          }
-            );
+          });
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,8 +173,20 @@ public class Main extends AppCompatActivity {
     }
 
     private void startSelectQuiz() {
-        final Intent selectQuiz = new Intent(myActivity, SelectQuiz.class);
-        startActivity(selectQuiz);
+
+        if (HelperMethods.checkInternetConnection(myActivity)) {
+            final Intent selectQuiz = new Intent(myActivity, SelectQuiz.class);
+            startActivity(selectQuiz);
+        }
+        else {
+            HelperMethods.createDialog(myActivity, "", "For further use of this application," +
+                    " please connect to the internet!" ,"OK", "", new DialogReturnCommand() {
+                @Override
+                public void finishIt() {
+                    // nothing
+                }
+            });
+        }
     }
 
     private void startSettings() {
@@ -160,6 +200,7 @@ public class Main extends AppCompatActivity {
             new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
         }
     }
+
 
 
 }

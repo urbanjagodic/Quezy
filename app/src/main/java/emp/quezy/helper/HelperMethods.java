@@ -2,8 +2,11 @@ package emp.quezy.helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,7 +23,8 @@ public class HelperMethods {
     }
 
 
-    public static void createDialog(Activity myActivity, String title, String message, final DialogReturnCommand myCommand) {
+    public static void createDialog(Activity myActivity, String title, String message, String okButton, String cancelButton,
+                                    final DialogReturnCommand myCommand) {
 
         AlertDialog.Builder myBuilder;
 
@@ -31,13 +35,13 @@ public class HelperMethods {
         }
 
         myBuilder.setTitle(title).setMessage(message)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(okButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         myCommand.finishIt();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(cancelButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // blank
@@ -61,6 +65,13 @@ public class HelperMethods {
         } catch (Exception e) {
             Log.d("exception", e.getMessage() + "");
         }
+    }
+
+
+    public static boolean checkInternetConnection(Activity myActivity) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)  myActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

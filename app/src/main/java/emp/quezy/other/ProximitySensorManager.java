@@ -9,8 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.speech.RecognizerIntent;
 
-import emp.quezy.helper.HelperMethods;
-
 /**
  * Created by Urban on 3. 12. 2017.
  */
@@ -35,7 +33,7 @@ public class ProximitySensorManager implements SensorEventListener {
 
     }
 
-    protected void unregister() {
+    public void unregister() {
         mySensorManger.unregisterListener(this);
     }
 
@@ -49,6 +47,7 @@ public class ProximitySensorManager implements SensorEventListener {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY) {
             if (sensorEvent.values[0] >= -sensitivity && sensorEvent.values[0] <= sensitivity) {
 
+
                 // close to the device
                 Intent myIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 myIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -58,7 +57,7 @@ public class ProximitySensorManager implements SensorEventListener {
 
             } else {
                 // far away from device
-                HelperMethods.showToast(this.myActivity, "far away from device");
+                //HelperMethods.showToast(this.myActivity, "far away from device");
             }
         }
     }
