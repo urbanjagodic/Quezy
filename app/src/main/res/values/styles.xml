@@ -11,11 +11,15 @@
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorPrimary"> #000000</item>
+        <item name="colorPrimary">#000000</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
 
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

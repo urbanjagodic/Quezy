@@ -44,6 +44,13 @@
         </activity>
         <activity android:name=".settings.VoiceControl">
         </activity>
+        <activity android:name=".info.Info">
+        </activity>
+        <activity
+            android:name=".info.RecentCommands"
+            android:label="@string/title_activity_recent_commands"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
