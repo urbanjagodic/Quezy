@@ -38,11 +38,27 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+<<<<<<< HEAD
         <activity android:name=".quiz.SelectQuiz" />
         <activity android:name=".quiz.PlayQuiz" />
         <activity android:name=".settings.Settings" />
         <activity android:name=".settings.VoiceControl" />
         <activity android:name=".other.GetJSON"></activity>
+=======
+        <activity android:name=".quiz.SelectQuiz"/>
+        <activity android:name=".quiz.PlayQuiz"/>
+        <activity android:name=".settings.Settings">
+        </activity>
+        <activity android:name=".settings.VoiceControl">
+        </activity>
+        <activity android:name=".info.Info">
+        </activity>
+        <activity
+            android:name=".info.RecentCommands"
+            android:label="@string/title_activity_recent_commands"
+            android:theme="@style/AppTheme">
+        </activity>
+>>>>>>> master
     </application>
 
 </manifest>

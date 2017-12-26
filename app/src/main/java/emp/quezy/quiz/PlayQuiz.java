@@ -43,6 +43,8 @@ public class PlayQuiz extends AppCompatActivity {
 
         new ReadJSON().execute(url);
 
+
+
     }
 
     private static String getURL(Bundle bnd) {
@@ -128,7 +130,10 @@ public class PlayQuiz extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
 }
+=======
+>>>>>>> master
 
 class Question {
 
@@ -165,3 +170,7 @@ class Question {
         this.wrongAnswers = wrongAnswers;
     }
 }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> master

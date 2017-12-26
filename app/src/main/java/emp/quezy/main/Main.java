@@ -11,9 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Date;
+
 import emp.quezy.R;
 import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
+import emp.quezy.info.Info;
 import emp.quezy.other.ContentStore;
 import emp.quezy.other.MyAnimation;
 import emp.quezy.other.ProximitySensorManager;
@@ -50,8 +53,6 @@ public class Main extends AppCompatActivity {
 
 
 
-
-
     }
 
     @Override
@@ -74,6 +75,12 @@ public class Main extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myProximityManager.unregister();
+    }
+
     // string voice command result and executed task
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -86,12 +93,15 @@ public class Main extends AppCompatActivity {
             String result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
             //HelperMethods.showToast(myActivity, result);
 
+            storeVoiceCommandToSharedPrefs(result);
+
+
             if (VoiceCommands.exitCommands.contains(result)) {
                 HelperMethods.killApp(myActivity);
             } else if (VoiceCommands.settingsCommands.contains(result)) {
                 startSettings();
             } else if (VoiceCommands.infoCommands.contains(result)) {
-                //startInfo():
+                startInfo();
             } else if (VoiceCommands.playCommands.contains(result)) {
                 startSelectQuiz();
             }
@@ -164,7 +174,7 @@ public class Main extends AppCompatActivity {
                             startSettings();
                             break;
                         case R.id.infoButton:
-                            HelperMethods.showToast(Main.this, R.id.infoButton + "");
+                            startInfo();
                             break;
                     }
                 }
@@ -194,11 +204,29 @@ public class Main extends AppCompatActivity {
         startActivity(startSettings);
     }
 
+    private void startInfo() {
+        Intent startInfo = new Intent(myActivity, Info.class);
+        startActivity(startInfo);
+    }
+
 
     public void animateButtons() {
         for (ImageView button : startButtons) {
             new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
         }
+    }
+
+
+    public void storeVoiceCommandToSharedPrefs(String voiceCommand) {
+
+        ContentStore.initialize(myActivity);
+        SharedPreferences myPrefs = ContentStore.getMyPrefrences();
+
+        // default value is "" if the string does not exist
+        Object storedCommands = myPrefs.getString("voiceCommands", "");
+
+        storedCommands += ";" + new Date().toString().trim() + "|" + voiceCommand;
+        ContentStore.storeData(storedCommands, "voiceCommands");
     }
 
 
