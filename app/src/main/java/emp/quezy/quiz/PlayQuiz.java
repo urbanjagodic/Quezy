@@ -16,13 +16,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import emp.quezy.R;
 
 public class PlayQuiz extends AppCompatActivity {
 
-    HashSet<Question> questions;        // Kle v temu setu so vsa vprašanja
+    List<Question> questions;        // Kle v temu listu so vsa vprašanja
     JSONObject jsonObject;
     TextView tx;
 
@@ -31,8 +33,7 @@ public class PlayQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_quiz);
 
-        tx = findViewById(R.id.proba);
-        questions = new HashSet<>();
+        questions = new ArrayList<>();
 
         Intent intent = getIntent();
         String url = null;
@@ -44,7 +45,7 @@ public class PlayQuiz extends AppCompatActivity {
 
     }
 
-    static String getURL(Bundle bnd) {
+    private static String getURL(Bundle bnd) {
         if (bnd != null) {
             String cat = bnd.getString("emp.quezy.category");
             String dif = bnd.getString("emp.quezy.difficulty").toLowerCase();
@@ -91,6 +92,9 @@ public class PlayQuiz extends AppCompatActivity {
             try {
                 jsonObject = new JSONObject(s);
                 parseJSON(jsonObject);
+                findViewById(R.id.loadingPanel2).setVisibility(View.GONE);
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -109,8 +113,13 @@ public class PlayQuiz extends AppCompatActivity {
                 JSONObject qs = jsonArray.getJSONObject(i);
                 String str = qs.getString("question");
                 String right = qs.getString("correct_answer");
-                String wrong = qs.getString("incorrect_answers");
-                this.questions.add(new Question(str, right, wrong.replaceAll("[\\[\\]\"]", "")));
+                //String wrong = qs.getString("incorrect_answers");
+                JSONArray jaWrong = qs.getJSONArray("incorrect_answers");
+                String [] wrong = new String[jaWrong.length()];
+                for (int j = 0; j < jaWrong.length(); j++) {
+                    wrong[i] = jaWrong.getString(i);
+                }
+                this.questions.add(new Question(str, right, wrong));
             }
 
         } catch (JSONException e) {
@@ -119,21 +128,17 @@ public class PlayQuiz extends AppCompatActivity {
     }
 
 
-<<<<<<< HEAD
-
-=======
 }
-
 
 class Question {
 
     private String value, rightAnswer;
     private String[] wrongAnswers;
 
-    Question(String value, String rightAnswer, String wrongAnswers) {
+    Question(String value, String rightAnswer, String [] wrongAnswers) {
         this.value = value;
         this.rightAnswer = rightAnswer;
-        this.wrongAnswers = wrongAnswers.split(",");
+        this.wrongAnswers = wrongAnswers;
     }
 
     public String getValue() {
@@ -159,5 +164,4 @@ class Question {
     public void setWrongAnswers(String[] wrongAnswers) {
         this.wrongAnswers = wrongAnswers;
     }
->>>>>>> b70ef0919d7e122fe68d3fb5aaae41bff238e6dc
 }
