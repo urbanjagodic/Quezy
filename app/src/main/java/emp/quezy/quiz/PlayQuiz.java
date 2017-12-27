@@ -2,6 +2,7 @@ package emp.quezy.quiz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,7 +42,10 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         fillItemList(questions.get(qNumber));
         listView.setOnItemClickListener(this);
 
+
+
     }
+
 
     /**
      * Fills ArrayList with question parameters.
@@ -61,6 +65,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         Bundle bnd = getIntent().getExtras();
         if (bnd != null) {
             questions = bnd.getParcelableArrayList("emp.quezy.questionsList");
+
         }
     }
 
