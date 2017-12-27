@@ -51,6 +51,8 @@ public class Main extends AppCompatActivity {
         myProximityManager = new ProximitySensorManager(myActivity);
         myProximityManager.initialize();
 
+
+
     }
 
     @Override
@@ -164,6 +166,7 @@ public class Main extends AppCompatActivity {
                     HelperMethods.playSound(Main.this, R.raw.click1);
 
                     switch (view.getId()) {
+
                         case R.id.playButton:
                             startSelectQuiz();
                             break;

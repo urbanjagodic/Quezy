@@ -20,7 +20,6 @@
 
 
     <string name="loading_data_text"> Loading data</string>
-    <string name="title_activity_get_json">GetJson</string>
     <string name="title_activity_recent_commands">RecentCommands</string>
 
 </resources>

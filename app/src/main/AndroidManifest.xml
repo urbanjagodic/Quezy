@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="emp.quezy">
+<manifest package="emp.quezy"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <uses-feature
         android:name="android.hardware.sensor.proximity"
-        android:required="true" />
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,7 @@
             android:name=".main.Main"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
         <activity
@@ -28,26 +28,29 @@
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
 
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+            android:resource="@array/preloaded_fonts"/>
 
-        <activity android:name=".quiz.SelectQuiz" />
-        <activity android:name=".quiz.GetQuestions" />
-        <activity android:name=".settings.Settings" />
-        <activity android:name=".settings.VoiceControl" />
-        <activity android:name=".info.Info"></activity>
+        <activity android:name=".quiz.SelectQuiz"/>
+        <activity android:name=".quiz.PlayQuiz"/>
+        <activity android:name=".settings.Settings">
+        </activity>
+        <activity android:name=".settings.VoiceControl">
+        </activity>
+        <activity android:name=".info.Info">
+        </activity>
         <activity
             android:name=".info.RecentCommands"
             android:label="@string/title_activity_recent_commands"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".quiz.PlayQuiz"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
