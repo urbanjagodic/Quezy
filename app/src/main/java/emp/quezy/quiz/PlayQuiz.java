@@ -2,8 +2,8 @@ package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashSet;
 
 import emp.quezy.R;
@@ -40,13 +41,16 @@ public class PlayQuiz extends AppCompatActivity {
             url = getURL(intent.getExtras());
         }
 
+
         new ReadJSON().execute(url);
+
+
 
 
 
     }
 
-    static String getURL(Bundle bnd) {
+    private static String getURL(Bundle bnd) {
         if (bnd != null) {
             String cat = bnd.getString("emp.quezy.category");
             String dif = bnd.getString("emp.quezy.difficulty").toLowerCase();
@@ -65,8 +69,7 @@ public class PlayQuiz extends AppCompatActivity {
 
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL(strings[0]);
-                //tx.setText(strings[0]);
+                URL url = new URL(""+strings[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -115,6 +118,8 @@ public class PlayQuiz extends AppCompatActivity {
                 this.questions.add(new Question(str, right, wrong.replaceAll("[\\[\\]\"]", "")));
             }
 
+            Log.d("neki", this.questions.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -156,6 +161,11 @@ class Question {
 
     public void setWrongAnswers(String[] wrongAnswers) {
         this.wrongAnswers = wrongAnswers;
+    }
+
+    @Override
+    public String toString() {
+        return "question: " + this.value + ", right: " + this.rightAnswer + ", wrong: " + Arrays.toString(getWrongAnswers());
     }
 }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#818ddf</color>
     <color name="colorAccent">#ff4081</color>
     <color name="splash_screen_background">#6aa3f3</color>
@@ -12,6 +12,8 @@
     <color name="main_background_color">#80bfff</color>
     <color name="startup_icon_color">#990e0e</color>
 
-
     <color name="progress_bar_color"> #ffffff</color>
+
+    <color name="selectQuizbackground">#4da6ff</color>
+    <color name="selectQuizbackgrounditem">#3399ff</color>
 </resources>
