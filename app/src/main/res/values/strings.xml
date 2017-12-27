@@ -20,10 +20,7 @@
 
 
     <string name="loading_data_text"> Loading data</string>
-<<<<<<< HEAD
     <string name="title_activity_get_json">GetJson</string>
-=======
     <string name="title_activity_recent_commands">RecentCommands</string>
->>>>>>> master
 
 </resources>
