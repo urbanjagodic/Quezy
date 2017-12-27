@@ -49,7 +49,6 @@ public class GetQuestions extends AppCompatActivity {
             String cat = bnd.getString("emp.quezy.category");
             String dif = bnd.getString("emp.quezy.difficulty").toLowerCase();
             String nQ = bnd.getString("emp.quezy.num_questions");
-            Log.i("nQ", nQ);
 
             if (Integer.parseInt(cat) == 8) {
                 return "https://opentdb.com/api.php?amount=" + nQ + "&difficulty=" + dif + "&type=multiple";
@@ -115,7 +114,6 @@ public class GetQuestions extends AppCompatActivity {
                 return;
 
             JSONArray jsonArray = jObj.getJSONArray("results");
-            Log.i("length", String.valueOf(jsonArray.length()));
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject qs = jsonArray.getJSONObject(i);
                 String str = qs.getString("question");
@@ -126,7 +124,6 @@ public class GetQuestions extends AppCompatActivity {
                 for (int j = 0; j < jaWrong.length(); j++) {
                     wrong[j] = jaWrong.getString(j);
                 }
-                Log.i("wrong", Arrays.toString(wrong));
                 this.questions.add(new Question(str, right, wrong));
             }
 
