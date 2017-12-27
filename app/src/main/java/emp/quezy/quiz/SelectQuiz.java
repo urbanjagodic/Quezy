@@ -51,7 +51,7 @@ public class SelectQuiz extends AppCompatActivity {
                 bundle.putString("emp.quezy.difficulty", spnDifficulty.getSelectedItem().toString());
                 bundle.putString("emp.quezy.num_questions", spnNumQuestions.getSelectedItem().toString());
 
-                Intent intent = new Intent(SelectQuiz.this, GetQuestions.class);
+                Intent intent = new Intent(getApplicationContext(), GetQuestions.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
