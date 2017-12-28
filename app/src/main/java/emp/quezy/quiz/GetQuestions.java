@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import emp.quezy.R;
+import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 
 public class GetQuestions extends AppCompatActivity {
@@ -88,14 +89,26 @@ public class GetQuestions extends AppCompatActivity {
 
             try {
                 jsonObject = new JSONObject(s);
-                parseJSON(jsonObject);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("emp.quezy.questionsList", questions);
+                int response = parseJSON(jsonObject);
+                Log.i("response_return", Integer.toString(response));
+                if (response == 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("emp.quezy.questionsList", questions);
 
-                Intent intent = new Intent(getApplicationContext(), PlayQuiz.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(getApplicationContext(), PlayQuiz.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    HelperMethods.createDialog(GetQuestions.this, "Error", "Ups, this category doesn't have enough questions. Chose a different category or difficulty.",
+                            "Ok", "", new DialogReturnCommand() {
+                                @Override
+                                public void finishIt() {
+                                    finish();
+                                }
+                            });
+
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -104,30 +117,31 @@ public class GetQuestions extends AppCompatActivity {
         }
     }
 
-    private void parseJSON(JSONObject jObj) {
+    private int parseJSON(JSONObject jObj) {
+        int response = -1;
         try {
-            int response = jObj.getInt("response_code");
-            if (response != 0)
-                return;
-            JSONArray jsonArray = jObj.getJSONArray("results");
+            response = jObj.getInt("response_code");
+            if (response != 0) {
+                Log.i("response_code", Integer.toString(response));
+            } else {
+                JSONArray jsonArray = jObj.getJSONArray("results");
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject qs = jsonArray.getJSONObject(i);
-
-                String str = HelperMethods.unescapeChars(qs.getString("question"));
-                String right = HelperMethods.unescapeChars(qs.getString("correct_answer"));
-                JSONArray jaWrong = qs.getJSONArray("incorrect_answers");
-                String[] wrong = new String[jaWrong.length()];
-                for (int j = 0; j < jaWrong.length(); j++) {
-                    wrong[j] = HelperMethods.unescapeChars(jaWrong.getString(j));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject qs = jsonArray.getJSONObject(i);
+                    String str = HelperMethods.unescapeChars(qs.getString("question"));
+                    String right = HelperMethods.unescapeChars(qs.getString("correct_answer"));
+                    JSONArray jaWrong = qs.getJSONArray("incorrect_answers");
+                    String[] wrong = new String[jaWrong.length()];
+                    for (int j = 0; j < jaWrong.length(); j++) {
+                        wrong[j] = HelperMethods.unescapeChars(jaWrong.getString(j));
+                    }
+                    this.questions.add(new Question(str, right, wrong));
                 }
-                this.questions.add(new Question(str, right, wrong));
-
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return response;
     }
 }
 

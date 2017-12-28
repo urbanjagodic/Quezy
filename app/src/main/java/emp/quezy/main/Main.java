@@ -50,9 +50,6 @@ public class Main extends AppCompatActivity {
         // initialize myproximity manager
         myProximityManager = new ProximitySensorManager(myActivity);
         myProximityManager.initialize();
-
-
-
     }
 
     @Override
@@ -110,7 +107,6 @@ public class Main extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         HelperMethods.createDialog(myActivity, "Exit the application", "Are you sure?", "Yes", "No",
                 new DialogReturnCommand() {
             @Override
@@ -166,7 +162,6 @@ public class Main extends AppCompatActivity {
                     HelperMethods.playSound(Main.this, R.raw.click1);
 
                     switch (view.getId()) {
-
                         case R.id.playButton:
                             startSelectQuiz();
                             break;
@@ -209,13 +204,11 @@ public class Main extends AppCompatActivity {
         startActivity(startInfo);
     }
 
-
     public void animateButtons() {
         for (ImageView button : startButtons) {
             new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
         }
     }
-
 
     public void storeVoiceCommandToSharedPrefs(String voiceCommand) {
 
@@ -228,7 +221,5 @@ public class Main extends AppCompatActivity {
         storedCommands += ";" + new Date().toString().trim() + "|" + voiceCommand;
         ContentStore.storeData(storedCommands, "voiceCommands");
     }
-
-
 
 }

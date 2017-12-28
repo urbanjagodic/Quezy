@@ -21,5 +21,11 @@
 
     <string name="loading_data_text"> Loading data</string>
     <string name="title_activity_recent_commands">RecentCommands</string>
+    <string name="you_have_num_questions_left">You have NUM questions left</string>
+    <string name="play_again">Play Again</string>
+    <string name="score_cor_num">Score: COR / NUM</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="bad_score">Too bad :(</string>
+    <string name="ok_score">Good</string>
 
 </resources>

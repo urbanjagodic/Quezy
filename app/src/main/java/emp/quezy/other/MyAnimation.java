@@ -13,7 +13,6 @@ public class MyAnimation implements AnimationInterface {
 
     @Override
     public void fadeIn(View v, Context context, int resource) {
-
         Animation fadeInAnim = AnimationUtils.loadAnimation(context, resource);
         v.startAnimation(fadeInAnim);
 
@@ -21,7 +20,6 @@ public class MyAnimation implements AnimationInterface {
 
     @Override
     public void fadeOut(View v, Context context, int resource) {
-
         Animation fadeOutAnim = AnimationUtils.loadAnimation(context, resource);
         v.startAnimation(fadeOutAnim);
     }

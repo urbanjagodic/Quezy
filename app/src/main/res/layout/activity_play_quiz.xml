@@ -34,7 +34,7 @@
             android:layout_height="350dp"
             android:layout_margin="10dp"
             android:divider="@null"
-            android:dividerHeight="0dp"></ListView>
+            android:dividerHeight="0dp" />
     </LinearLayout>
 
     <TextView
@@ -47,6 +47,6 @@
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
-        android:text="You have NUM questions left"/>
+        android:text="@string/you_have_num_questions_left"/>
 
 </RelativeLayout>

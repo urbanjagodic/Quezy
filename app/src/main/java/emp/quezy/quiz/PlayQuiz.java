@@ -1,5 +1,6 @@
 package emp.quezy.quiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,7 @@ import emp.quezy.R;
 import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 
-// TODO When user click's back go to SelectQuiz activity not GetQuestions
-// TODO Display how many questions left and when over display score (?? new activity ??)
+// TODO When over display score (?? new activity ??)
 // TODO Save score into database upon completion
 
 /**
@@ -38,12 +38,15 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     ListView listView;
     TextView numQuestionLeftText;
     int qNumber; // Which question are we displaying
+    int numCorrect;  // Number of correct answers
     QuestionAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_quiz);
+
+        numCorrect = 0;
 
         listView = findViewById(R.id.PlayQuizListView);
         numQuestionLeftText = findViewById(R.id.questionsLeftText);
@@ -69,9 +72,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         ((TextView)findViewById(R.id.questionText)).setText(question.getQuestionText());
 
         String[] shuffledAnswers = randomizeAnswers(question);
-        for (String answer : shuffledAnswers) {
-            item.add(answer);
-        }
+        item.addAll(Arrays.asList(shuffledAnswers));
         adapter.notifyDataSetChanged();
     }
 
@@ -84,7 +85,6 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
 
     @Override
     public void onBackPressed() {
-
         HelperMethods.createDialog(PlayQuiz.this, "Restart the quiz", "Do you wish to start a new quiz?",
                 "Yes", "No", new DialogReturnCommand() {
                     @Override
@@ -98,11 +98,11 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         if (parent.getItemAtPosition(position).toString().equals(questions.get(qNumber).getRightAnswer())) {
-
             changeItemColorAndIncrement(new DialogReturnCommand() {
                 @Override
                 public void finishIt() {
                     QuestionAdapter.setToGreen(position);
+                    numCorrect++;
                 }
             });
         }
@@ -137,6 +137,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                 listView.setAdapter(adapter);
                 if (qNumber == questions.size() - 1) {
                     HelperMethods.showToast(PlayQuiz.this, "end is here");
+                    finishGame();
                 }
                 else{
                     fillItemList(questions.get(qNumber));
@@ -145,9 +146,19 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         }, 1300);
     }
 
+    private void finishGame() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("emp.quezy.correctAnswers", numCorrect);
+        bundle.putInt("emp.quezy.numberOfQuestions", questions.size());
+
+        Intent intent = new Intent(getApplicationContext(), EndScreen.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
 
     private String[] randomizeAnswers(Question myQuestion) {
-
         String[] answers = { myQuestion.getRightAnswer(), myQuestion.getWrongAnswers()[0],
                 myQuestion.getWrongAnswers()[1],
                 myQuestion.getWrongAnswers()[2]};

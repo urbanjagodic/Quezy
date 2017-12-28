@@ -12,9 +12,7 @@ import java.util.ArrayList;
 
 import emp.quezy.R;
 
-
 public class QuestionAdapter extends ArrayAdapter<String>  {
-
 
     public static boolean setToGreen = false;
     public static boolean setToRed = false;
