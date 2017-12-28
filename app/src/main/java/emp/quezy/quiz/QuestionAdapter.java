@@ -13,9 +13,14 @@ import java.util.ArrayList;
 import emp.quezy.R;
 
 
-public class QuestionAdapter extends ArrayAdapter<String> {
+public class QuestionAdapter extends ArrayAdapter<String>  {
 
-    private static class ViewHolder {
+
+    public static boolean setToGreen = false;
+    public static boolean setToRed = false;
+    public static int myPosition = -1;
+
+    public static class ViewHolder {
         TextView QuestionText;
     }
 
@@ -34,6 +39,16 @@ public class QuestionAdapter extends ArrayAdapter<String> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_layout, parent, false);
             viewHolder.QuestionText = convertView.findViewById(R.id.QuestionText);
+
+            if (position == myPosition) {
+                if (setToGreen) {
+                    viewHolder.QuestionText.setBackground(convertView.getResources().getDrawable(R.drawable.answerbackgroundcorrect));
+                }
+                if (setToRed) {
+                    viewHolder.QuestionText.setBackground(convertView.getResources().getDrawable(R.drawable.answerbackgroundfalse));
+                }
+            }
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -42,5 +57,20 @@ public class QuestionAdapter extends ArrayAdapter<String> {
         viewHolder.QuestionText.setText(value);
 
         return convertView;
+    }
+
+    public static void setToRed(int position) {
+        setToRed = true;
+        myPosition = position;
+    }
+
+    public static void setToGreen(int position) {
+        setToGreen = true;
+        myPosition = position;
+    }
+
+    public static void setToDefault() {
+        setToGreen = false;
+        setToRed = false;
     }
 }

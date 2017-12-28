@@ -2,11 +2,10 @@ package emp.quezy.quiz;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,10 +16,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import emp.quezy.R;
+import emp.quezy.helper.HelperMethods;
 
 public class GetQuestions extends AppCompatActivity {
 
@@ -91,14 +89,13 @@ public class GetQuestions extends AppCompatActivity {
             try {
                 jsonObject = new JSONObject(s);
                 parseJSON(jsonObject);
-                //findViewById(R.id.loadingPanel2).setVisibility(View.GONE);
-
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("emp.quezy.questionsList", questions);
 
                 Intent intent = new Intent(getApplicationContext(), PlayQuiz.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -112,19 +109,20 @@ public class GetQuestions extends AppCompatActivity {
             int response = jObj.getInt("response_code");
             if (response != 0)
                 return;
-
             JSONArray jsonArray = jObj.getJSONArray("results");
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject qs = jsonArray.getJSONObject(i);
-                String str = qs.getString("question");
-                String right = qs.getString("correct_answer");
-                //String wrong = qs.getString("incorrect_answers");
+
+                String str = HelperMethods.unescapeChars(qs.getString("question"));
+                String right = HelperMethods.unescapeChars(qs.getString("correct_answer"));
                 JSONArray jaWrong = qs.getJSONArray("incorrect_answers");
                 String[] wrong = new String[jaWrong.length()];
                 for (int j = 0; j < jaWrong.length(); j++) {
-                    wrong[j] = jaWrong.getString(j);
+                    wrong[j] = HelperMethods.unescapeChars(jaWrong.getString(j));
                 }
                 this.questions.add(new Question(str, right, wrong));
+
             }
 
         } catch (JSONException e) {

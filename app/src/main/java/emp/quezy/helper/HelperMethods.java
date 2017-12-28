@@ -74,4 +74,34 @@ public class HelperMethods {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+
+    public static String unescapeChars(String input) {
+
+        if (input.contains("&amp;")) {
+            input = input.replace("&amp;", "&");
+        }
+        if (input.contains("amp;")) {
+            input = input.replace("amp;", "&");
+        }
+        if (input.contains("&quot;")) {
+            input = input.replace("&quot;", "\"");
+        }
+        if (input.contains("quot;")) {
+            input = input.replace("quot;", "\"");
+        }
+        if (input.contains("&#039;")) {
+            input = input.replace("&#039;", "\'");
+        }
+        if (input.contains("#039;")) {
+            input = input.replace("#039;", "\'");
+        }
+        if (input.contains("rsquo;")) {
+            input = input.replace("rsquo;", "’");
+        }
+        if (input.contains("ouml;")) {
+            input = input.replace("ouml;", "ö");
+        }
+        return input;
+    }
+
 }

@@ -16,4 +16,7 @@
 
     <color name="selectQuizbackground">#4da6ff</color>
     <color name="selectQuizbackgrounditem">#3399ff</color>
+
+    <color name="listitemcorrect">#17e014</color>
+    <color name="listitemfalse">#e83a1b</color>
 </resources>
