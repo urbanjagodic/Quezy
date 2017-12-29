@@ -205,7 +205,7 @@ public class Main extends AppCompatActivity {
 
     public void animateButtons() {
         for (ImageView button : startButtons) {
-            new MyAnimation().fadeIn(button, getApplicationContext(), R.anim.fade_in);
+            new MyAnimation().fadeIn(button, myActivity, R.anim.fade_in);
         }
     }
 

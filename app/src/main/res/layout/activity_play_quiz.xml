@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_background_color"
-    tools:context="emp.quezy.quiz.PlayQuiz">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:background="@color/main_background_color"
+                tools:context="emp.quezy.quiz.PlayQuiz">
 
     <LinearLayout
+        android:id="@+id/coreLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="100dp"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/questionText"
@@ -34,16 +36,16 @@
             android:layout_height="350dp"
             android:layout_margin="10dp"
             android:divider="@null"
-            android:dividerHeight="0dp" />
+            android:dividerHeight="0dp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/questionsLeftText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/linearLayout2"
+        android:layout_alignEnd="@+id/coreLayout"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_alignRight="@+id/coreLayout"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
@@ -53,9 +55,9 @@
         android:id="@+id/currentScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/linearLayout2"
+        android:layout_alignEnd="@+id/coreLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_alignRight="@+id/coreLayout"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/currentscoretext"

@@ -23,4 +23,10 @@ public class MyAnimation implements AnimationInterface {
         Animation fadeOutAnim = AnimationUtils.loadAnimation(context, resource);
         v.startAnimation(fadeOutAnim);
     }
+
+    @Override
+    public void slideFromRight(View v, Context context, int resource) {
+        Animation fadeInAnim = AnimationUtils.loadAnimation(context, resource);
+        v.startAnimation(fadeInAnim);
+    }
 }
