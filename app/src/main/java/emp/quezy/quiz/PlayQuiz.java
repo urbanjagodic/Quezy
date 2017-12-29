@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
 import emp.quezy.R;
 import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
+import emp.quezy.other.MyAnimation;
 
 // TODO When over display score (?? new activity ??)
 // TODO Save score into database upon completion
@@ -42,7 +44,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     int numCorrect;                 // Number of correct answers
     int overAllPoints;              // all points that user achieves
     QuestionAdapter adapter;
-
+    LinearLayout coreLayout;
     int difficultyMultiplier;       // easy = 2, medium = 3, hard = 4
 
     @Override
@@ -55,6 +57,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         listView = findViewById(R.id.PlayQuizListView);
         numQuestionLeftText = findViewById(R.id.questionsLeftText);
         currentScoreText = findViewById(R.id.currentScoreText);
+        coreLayout = findViewById(R.id.coreLayout);
         retrieveListAndSetDifficulty();
 
         item = new ArrayList<>();
@@ -67,6 +70,9 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
 
         fillItemList(questions.get(qNumber));
         listView.setOnItemClickListener(this);
+
+       slideAnim();
+
     }
 
     /**
@@ -153,6 +159,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
             numQuestionLeftText.setTextColor(getResources().getColor(R.color.listitemfalse));
         }
         numQuestionLeftText.setText(questions.size() == qNumber ? "" : updatedString);
+
         currentScoreText.setText(getResources().getString(R.string.currentscoretext) + " " + overAllPoints);
     }
 
@@ -175,6 +182,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                 }
                 else{
                     fillItemList(questions.get(qNumber));
+                    slideAnim();
                 }
             }
         }, 1600);
@@ -208,5 +216,9 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         Pattern myPattern = Pattern.compile("[\\d]+");
         Matcher myMatcher = myPattern.matcher(text);
         return myMatcher.find() ? myMatcher.group() : "";
+    }
+
+    private void slideAnim() {
+        new MyAnimation().slideFromRight(coreLayout, PlayQuiz.this, R.anim.slide_from_right);
     }
 }
