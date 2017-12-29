@@ -43,6 +43,8 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     int overAllPoints;              // all points that user achieves
     QuestionAdapter adapter;
 
+    String category;
+    String difficulty;
     int difficultyMultiplier;       // easy = 2, medium = 3, hard = 4
 
     @Override
@@ -86,7 +88,8 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         Bundle bnd = getIntent().getExtras();
         if (bnd != null) {
             questions = bnd.getParcelableArrayList("emp.quezy.questionsList");
-            String difficulty = bnd.getString("emp.quezy.difficulty");
+            category = bnd.getString("emp.quezy.category");
+            difficulty = bnd.getString("emp.quezy.difficulty");
             switch (difficulty) {
                 case "easy":
                     difficultyMultiplier = 10;
@@ -186,6 +189,8 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         bundle.putInt("emp.quezy.numberOfQuestions", questions.size());
         bundle.putInt("emp.quezy.maxPoints", questions.size() * difficultyMultiplier);
         bundle.putInt("emp.quezy.overallScore", overAllPoints);
+        bundle.putString("emp.quezy.difficulty", difficulty);
+        bundle.putString("emp.quezy.category", category);
 
         Intent intent = new Intent(getApplicationContext(), EndScreen.class);
         intent.putExtras(bundle);

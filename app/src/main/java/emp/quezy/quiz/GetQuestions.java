@@ -25,7 +25,8 @@ public class GetQuestions extends AppCompatActivity {
 
     ArrayList<Question> questions;        // Kle v temu listu so vsa vprašanja
     JSONObject jsonObject;
-    public static String dif;
+    static String dif;
+    static String categoryString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class GetQuestions extends AppCompatActivity {
 
     public static String getURL(Bundle bnd) {
         if (bnd != null) {
+            categoryString = bnd.getString("emp.quezy.category_string");
             String cat = bnd.getString("emp.quezy.category");
             dif = bnd.getString("emp.quezy.difficulty").toLowerCase();
             String nQ = bnd.getString("emp.quezy.num_questions");
@@ -96,6 +98,7 @@ public class GetQuestions extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("emp.quezy.questionsList", questions);
                     bundle.putString("emp.quezy.difficulty", dif);
+                    bundle.putString("emp.quezy.category", categoryString);
 
                     Intent intent = new Intent(getApplicationContext(), PlayQuiz.class);
                     intent.putExtras(bundle);

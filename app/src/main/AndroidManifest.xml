@@ -40,15 +40,16 @@
 
         <activity android:name=".quiz.SelectQuiz" />
         <activity android:name=".quiz.PlayQuiz" />
-        <activity android:name=".settings.Settings"></activity>
-        <activity android:name=".settings.VoiceControl"></activity>
-        <activity android:name=".info.Info"></activity>
+        <activity android:name=".settings.Settings" />
+        <activity android:name=".settings.VoiceControl" />
+        <activity android:name=".info.Info" />
         <activity
             android:name=".info.RecentCommands"
             android:label="@string/title_activity_recent_commands"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".quiz.GetQuestions" />
-        <activity android:name=".quiz.EndScreen"></activity>
+        <activity android:name=".quiz.EndScreen" />
+        <activity android:name=".info.HighScores"></activity>
     </application>
 
 </manifest>

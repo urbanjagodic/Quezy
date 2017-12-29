@@ -24,7 +24,7 @@ public class Info extends AppCompatActivity {
 
         myListView = (ListView) findViewById(R.id.infoList);
 
-        String[] values = { "About the game", "Show log of recent voice commands" };
+        String[] values = { "About the game", "Show log of recent voice commands", "Show high score" };
 
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, values);
         myListView.setAdapter(myArrayAdapter);
@@ -40,12 +40,19 @@ public class Info extends AppCompatActivity {
 
                 if (i == 1) {
                     openRecentCommands();
+                } else if (i == 2) {
+                    openHighScore();
                 }
 
             }
         });
 
 
+    }
+
+    private void openHighScore() {
+        Intent myIntent = new Intent(myActivity, HighScores.class);
+        startActivity(myIntent);
     }
 
     public void openRecentCommands() {

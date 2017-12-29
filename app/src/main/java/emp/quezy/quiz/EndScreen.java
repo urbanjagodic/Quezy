@@ -9,7 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import emp.quezy.R;
+import emp.quezy.helper.DatabaseConnector;
+import emp.quezy.info.HighScores;
 
 public class EndScreen extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,11 +22,14 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
     int numQuestions;  // Number of questions
     int maxPoints;
     int overallScore;
+    String category;
+    String difficulty;
     TextView mainText;
     TextView scoreText;
     TextView overallPointsText;
     ImageView scoreImage;
     Button playAgainBtn;
+    Button showHighScore;
 
 
     @Override
@@ -30,9 +38,19 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_end_screen);
 
         initialize();
+        insertScore();
         setTexts();
 
         playAgainBtn.setOnClickListener(this);
+        showHighScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HighScores.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void setTexts() {
@@ -66,6 +84,7 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         scoreText = findViewById(R.id.scoreText);
         overallPointsText = findViewById(R.id.overallPointsText);
         playAgainBtn = findViewById(R.id.endScreenPlayAgain);
+        showHighScore = findViewById(R.id.endScreenHighScore);
         scoreImage = findViewById(R.id.scoreImage);
 
         Bundle bnd = getIntent().getExtras();
@@ -74,7 +93,17 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
             numQuestions = bnd.getInt("emp.quezy.numberOfQuestions");
             maxPoints = bnd.getInt("emp.quezy.maxPoints");
             overallScore = bnd.getInt("emp.quezy.overallScore");
+            difficulty = bnd.getString("emp.quezy.difficulty");
+            category = bnd.getString("emp.quezy.category");
         }
+    }
+
+    private void insertScore() {
+        DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+
+        databaseConnector.insertScore(date, category, difficulty, overallScore);
     }
 
     @Override

@@ -20,7 +20,8 @@
             android:layout_height="200dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/notbad"/>
+            app:srcCompat="@drawable/notbad"
+            android:contentDescription="@string/end_score_img" />
 
         <TextView
             android:id="@+id/mainText"
@@ -58,7 +59,9 @@
             android:gravity="center_horizontal"
             android:text="@string/overallpointstext"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp" />
 
         <RelativeLayout android:id="@+id/RelativeLayout01"
                         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -72,6 +75,12 @@
                 android:layout_centerInParent="true"
                 android:text="@string/play_again"
                 android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/endScreenHighScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/high_score" />
 
         </RelativeLayout>
     </LinearLayout>

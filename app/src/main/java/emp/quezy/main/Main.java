@@ -46,7 +46,6 @@ public class Main extends AppCompatActivity {
         animateButtons();
         buttonAction();
 
-
         // initialize myproximity manager
         myProximityManager = new ProximitySensorManager(myActivity);
         myProximityManager.initialize();

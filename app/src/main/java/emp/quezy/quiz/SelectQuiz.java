@@ -62,6 +62,7 @@ public class SelectQuiz extends AppCompatActivity {
             public void onClick(View v) {
 
                 Bundle bundle = new Bundle();
+                bundle.putString("emp.quezy.category_string", spnCategory.getSelectedItem().toString());
                 bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition() + 8));
                 bundle.putString("emp.quezy.difficulty", ((RadioButton)findViewById(myGroup.getCheckedRadioButtonId())).getText() + "");
                 bundle.putString("emp.quezy.num_questions", (seekbarchanged ? lastQuestionValue : lastQuestionValue + MIN_VAL) + "");

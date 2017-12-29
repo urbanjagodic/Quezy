@@ -16,5 +16,8 @@
     <string name="ok_score">Good</string>
     <string name="currentscoretext">Current score:</string>
     <string name="overallpointstext">Overall points:</string>
+    <string name="end_score_img">End score img</string>
+    <string name="score">Score</string>
+    <string name="high_score">High Score</string>
 
 </resources>
