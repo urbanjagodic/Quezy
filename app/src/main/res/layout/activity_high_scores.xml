@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_background_color"
-    tools:context="emp.quezy.info.HighScores">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_background_color"
+              android:orientation="vertical"
+              android:padding="20dp"
+              tools:context="emp.quezy.info.HighScores">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/category" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/category"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/difficulty" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/difficulty"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/score" />
+            android:gravity="center_horizontal"
+            android:text="@string/score"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/high_score_listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="464dp"/>
 </LinearLayout>

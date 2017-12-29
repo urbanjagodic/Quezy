@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import emp.quezy.R;
@@ -100,10 +99,10 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
 
     private void insertScore() {
         DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
-
-        databaseConnector.insertScore(date, category, difficulty, overallScore);
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //String date = sdf.format(new Date());
+        databaseConnector.insertScore(new Date().toString().trim().replace("GMT+01:00", ""),
+                category, difficulty, overallScore);
     }
 
     @Override
@@ -112,5 +111,4 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         startActivity(intent);
         finish();
     }
-
 }

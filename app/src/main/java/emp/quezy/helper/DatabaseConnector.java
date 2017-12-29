@@ -3,13 +3,9 @@ package emp.quezy.helper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import java.util.ArrayList;
 
 /**
  * Class used for database query's
@@ -46,9 +42,14 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     }
 
     public void close() {
-        if (database != null) {
+        if (database != null)
             database.close();
-        }
+    }
+
+    public void clear() {
+        open();
+        database.execSQL("delete from " + TABLE_NAME);
+        close();
     }
 
     public void insertScore(String date, String category, String difficulty, int score) {
@@ -69,11 +70,11 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 null, null,null,C_Score + " DESC",null);
     }
 
-    public Cursor getTopTen(){
-        String [] cols = new String[]{C_ID, C_Category, C_Difficulty, C_Score};
+    public Cursor getTopGames(int num){
+        String [] cols = new String[]{C_ID, C_Category, C_Difficulty, C_Score, C_Date};
         return database.query(TABLE_NAME, cols,
                 null, null, null,null,
-                C_Score + " DESC","10");
+                C_Score + " DESC",num +"");
     }
 
 }
