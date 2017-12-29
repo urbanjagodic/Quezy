@@ -15,8 +15,9 @@ import emp.quezy.R;
 public class QuestionAdapter extends ArrayAdapter<String>  {
 
     public static boolean setToGreen = false;
-    public static boolean setToRed = false;
-    public static int myPosition = -1;
+    public static boolean setToRedAndGreen = false;
+    public static int primaryPosition = -1;
+    public static int secondaryPosition = -1;
 
     public static class ViewHolder {
         TextView QuestionText;
@@ -38,37 +39,40 @@ public class QuestionAdapter extends ArrayAdapter<String>  {
             convertView = inflater.inflate(R.layout.list_layout, parent, false);
             viewHolder.QuestionText = convertView.findViewById(R.id.QuestionText);
 
-            if (position == myPosition) {
-                if (setToGreen) {
+            if (setToGreen) {
+                if (position == primaryPosition) {
                     viewHolder.QuestionText.setBackground(convertView.getResources().getDrawable(R.drawable.answerbackgroundcorrect));
                 }
-                if (setToRed) {
+            }
+            if (setToRedAndGreen) {
+                if (position == primaryPosition) {
                     viewHolder.QuestionText.setBackground(convertView.getResources().getDrawable(R.drawable.answerbackgroundfalse));
                 }
+                if (position == secondaryPosition) {
+                    viewHolder.QuestionText.setBackground(convertView.getResources().getDrawable(R.drawable.answerbackgroundcorrect));
+                }
             }
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         viewHolder.QuestionText.setText(value);
-
         return convertView;
     }
 
-    public static void setToRed(int position) {
-        setToRed = true;
-        myPosition = position;
+    public static void setToRedAndGreen(int positionRed, int positionGreen) {
+        setToRedAndGreen = true;
+        primaryPosition = positionRed;
+        secondaryPosition = positionGreen;
     }
 
     public static void setToGreen(int position) {
         setToGreen = true;
-        myPosition = position;
+        primaryPosition = position;
     }
 
     public static void setToDefault() {
         setToGreen = false;
-        setToRed = false;
+        setToRedAndGreen = false;
     }
 }

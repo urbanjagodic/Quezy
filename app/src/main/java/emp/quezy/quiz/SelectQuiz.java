@@ -68,6 +68,7 @@ public class SelectQuiz extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), GetQuestions.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
             }
         });
     }

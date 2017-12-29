@@ -5,19 +5,6 @@
     <string name="numQ">Number of Questions:</string>
     <string name="play">Play</string>
 
-    <string-array name="difficulty_array">
-        <item>Easy</item>
-        <item>Medium</item>
-        <item>Hard</item>
-    </string-array>
-
-    <string-array name="questions_array">
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
-        <item>25</item>
-    </string-array>
-
 
     <string name="loading_data_text"> Loading data</string>
     <string name="title_activity_recent_commands">RecentCommands</string>
@@ -27,5 +14,7 @@
     <string name="congratulations">Congratulations</string>
     <string name="bad_score">Too bad :(</string>
     <string name="ok_score">Good</string>
+    <string name="currentscoretext">Current score:</string>
+    <string name="overallpointstext">Overall points:</string>
 
 </resources>

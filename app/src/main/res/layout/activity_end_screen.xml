@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/mainText"
@@ -20,9 +22,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
+            android:text="@string/congratulations"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="@string/congratulations" />
+            android:textStyle="bold"/>
 
 
         <TextView
@@ -33,24 +35,36 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
+            android:text="@string/score_cor_num"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="@string/score_cor_num" />
+            android:textStyle="bold"/>
 
+
+        <TextView
+            android:id="@+id/overallPointsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/overallpointstext"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <RelativeLayout android:id="@+id/RelativeLayout01"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/endScreenPlayAgain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 android:layout_centerInParent="true"
-                android:text="@string/play_again" />
+                android:text="@string/play_again"
+                android:textSize="14sp"/>
 
         </RelativeLayout>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

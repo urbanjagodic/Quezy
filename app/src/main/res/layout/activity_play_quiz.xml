@@ -49,4 +49,17 @@
         android:layout_marginRight="11dp"
         android:text="@string/you_have_num_questions_left"/>
 
+    <TextView
+        android:id="@+id/currentScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/linearLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/currentscoretext"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
 </RelativeLayout>

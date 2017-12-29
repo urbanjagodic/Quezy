@@ -19,4 +19,7 @@
 
     <color name="listitemcorrect">#17e014</color>
     <color name="listitemfalse">#e83a1b</color>
+
+    <color name="goodtext"> #f9c004</color>
+    <color name="greattext"> #06cc09</color>
 </resources>

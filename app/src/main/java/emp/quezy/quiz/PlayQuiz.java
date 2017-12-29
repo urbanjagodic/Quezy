@@ -37,9 +37,13 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     ArrayList<String> item;
     ListView listView;
     TextView numQuestionLeftText;
-    int qNumber; // Which question are we displaying
-    int numCorrect;  // Number of correct answers
+    TextView currentScoreText;
+    int qNumber;                    // Which question are we displaying
+    int numCorrect;                 // Number of correct answers
+    int overAllPoints;              // all points that user achieves
     QuestionAdapter adapter;
+
+    int difficultyMultiplier;       // easy = 2, medium = 3, hard = 4
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,8 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
 
         listView = findViewById(R.id.PlayQuizListView);
         numQuestionLeftText = findViewById(R.id.questionsLeftText);
-        retrieveList();
+        currentScoreText = findViewById(R.id.currentScoreText);
+        retrieveListAndSetDifficulty();
 
         item = new ArrayList<>();
         adapter = new QuestionAdapter(getApplicationContext(), item);
@@ -58,6 +63,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
 
         String updatedString = numQuestionLeftText.getText().toString().replace("NUM", questions.size() - 1 + "");
         numQuestionLeftText.setText(updatedString);
+        currentScoreText.setText(getResources().getString(R.string.currentscoretext) + " " + overAllPoints);
 
         fillItemList(questions.get(qNumber));
         listView.setOnItemClickListener(this);
@@ -76,10 +82,22 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
         adapter.notifyDataSetChanged();
     }
 
-    private void retrieveList() {
+    private void retrieveListAndSetDifficulty() {
         Bundle bnd = getIntent().getExtras();
         if (bnd != null) {
             questions = bnd.getParcelableArrayList("emp.quezy.questionsList");
+            String difficulty = bnd.getString("emp.quezy.difficulty");
+            switch (difficulty) {
+                case "easy":
+                    difficultyMultiplier = 10;
+                    break;
+                case "medium":
+                    difficultyMultiplier = 35;
+                    break;
+                case "hard":
+                    difficultyMultiplier = 60;
+                    break;
+            }
         }
     }
 
@@ -89,6 +107,8 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                 "Yes", "No", new DialogReturnCommand() {
                     @Override
                     public void finishIt() {
+                        Intent startSelectAgain = new Intent(PlayQuiz.this, SelectQuiz.class);
+                        startActivity(startSelectAgain);
                         finish();
                     }
                 });
@@ -97,12 +117,15 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-        if (parent.getItemAtPosition(position).toString().equals(questions.get(qNumber).getRightAnswer())) {
+        final String rightAnswer = questions.get(qNumber).getRightAnswer();
+
+        if (parent.getItemAtPosition(position).toString().equals(rightAnswer)) {
             changeItemColorAndIncrement(new DialogReturnCommand() {
                 @Override
                 public void finishIt() {
                     QuestionAdapter.setToGreen(position);
                     numCorrect++;
+                    overAllPoints += difficultyMultiplier;
                 }
             });
         }
@@ -110,15 +133,27 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
             changeItemColorAndIncrement(new DialogReturnCommand() {
                 @Override
                 public void finishIt() {
-                    QuestionAdapter.setToRed(position);
+                    int rightItemPosition = -1;
+                    for (int i = 0; i < item.size(); i++) {
+                        if (item.get(i).equals(rightAnswer)) {
+                            rightItemPosition = i;
+                        }
+                    }
+                    QuestionAdapter.setToRedAndGreen(position, rightItemPosition);
                 }
             });
         }
-
         String numberText = numQuestionLeftText.getText().toString();
         String numberToReplace = retRegexNumber(numberText);
-        String updatedString = numberText.replace(numberToReplace, (questions.size() - 1) - qNumber + "");
-        numQuestionLeftText.setText(updatedString);
+        int numberQuestLeft = (questions.size() -1) - qNumber;
+
+        String updatedString = numberText.replace(numberToReplace, numberQuestLeft + "");
+
+        if (numberQuestLeft <= Math.round( (2.0 * questions.size())/10)) {
+            numQuestionLeftText.setTextColor(getResources().getColor(R.color.listitemfalse));
+        }
+        numQuestionLeftText.setText(questions.size() == qNumber ? "" : updatedString);
+        currentScoreText.setText(getResources().getString(R.string.currentscoretext) + " " + overAllPoints);
     }
 
 
@@ -135,21 +170,22 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
 
                 QuestionAdapter.setToDefault();
                 listView.setAdapter(adapter);
-                if (qNumber == questions.size() - 1) {
-                    HelperMethods.showToast(PlayQuiz.this, "end is here");
+                if (qNumber == questions.size()) {
                     finishGame();
                 }
                 else{
                     fillItemList(questions.get(qNumber));
                 }
             }
-        }, 1300);
+        }, 1600);
     }
 
     private void finishGame() {
         Bundle bundle = new Bundle();
         bundle.putInt("emp.quezy.correctAnswers", numCorrect);
         bundle.putInt("emp.quezy.numberOfQuestions", questions.size());
+        bundle.putInt("emp.quezy.maxPoints", questions.size() * difficultyMultiplier);
+        bundle.putInt("emp.quezy.overallScore", overAllPoints);
 
         Intent intent = new Intent(getApplicationContext(), EndScreen.class);
         intent.putExtras(bundle);
