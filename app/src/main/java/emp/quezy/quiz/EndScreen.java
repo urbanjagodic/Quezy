@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import emp.quezy.R;
@@ -19,6 +20,7 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
     TextView mainText;
     TextView scoreText;
     TextView overallPointsText;
+    ImageView scoreImage;
     Button playAgainBtn;
 
 
@@ -41,12 +43,15 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         } else if (percent < 0.4) {
             mainText.setText(R.string.bad_score);
             mainText.setTextColor(getResources().getColor(R.color.listitemfalse));
+            scoreImage.setImageResource(R.drawable.dissapointed);
         } else if (percent < 0.6) {
             mainText.setText(R.string.ok_score);
             mainText.setTextColor(getResources().getColor(R.color.goodtext));
+            scoreImage.setImageResource(R.drawable.notbad);
         } else if (percent <= 1.0) {
             mainText.setText(R.string.congratulations);
             mainText.setTextColor(getResources().getColor(R.color.greattext));
+            scoreImage.setImageResource(R.drawable.congratulations);
         } else {
             Log.i("percent_ERR", Double.toString(percent));
         }
@@ -61,6 +66,7 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         scoreText = findViewById(R.id.scoreText);
         overallPointsText = findViewById(R.id.overallPointsText);
         playAgainBtn = findViewById(R.id.endScreenPlayAgain);
+        scoreImage = findViewById(R.id.scoreImage);
 
         Bundle bnd = getIntent().getExtras();
         if (bnd != null) {
