@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import emp.quezy.R;
+import emp.quezy.helper.HelperMethods;
 
 public class SelectQuiz extends AppCompatActivity {
 
@@ -61,6 +62,9 @@ public class SelectQuiz extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (HelperMethods.turnOnSound(SelectQuiz.this)) {
+                    HelperMethods.playSound(SelectQuiz.this, R.raw.click1);
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("emp.quezy.category_string", spnCategory.getSelectedItem().toString());
                 bundle.putString("emp.quezy.category", Integer.toString(spnCategory.getSelectedItemPosition() + 8));

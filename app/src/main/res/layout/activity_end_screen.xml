@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     tools:context="emp.quezy.quiz.EndScreen">
 
     <LinearLayout
+        android:id="@+id/endScreenLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -22,7 +24,7 @@
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="10dp"
             android:contentDescription="@string/end_score_img"
-            app:srcCompat="@drawable/notbad" />
+            app:srcCompat="@drawable/notbad"/>
 
         <TextView
             android:id="@+id/mainText"
@@ -34,7 +36,7 @@
             android:gravity="center_horizontal"
             android:text="@string/congratulations"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
 
         <TextView
@@ -47,7 +49,7 @@
             android:gravity="center_horizontal"
             android:text="@string/score_cor_num"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
 
         <TextView
@@ -62,27 +64,29 @@
             android:gravity="center_horizontal"
             android:text="@string/overallpointstext"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/RelativeLayout01"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <Button
+            <ImageView
                 android:id="@+id/endScreenPlayAgain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/play_again"
-                android:textSize="14sp" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/playagainimage"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/endScreenHighScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/high_score" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/highscoreimage"/>
+        </LinearLayout>
 
-        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,9 +29,7 @@ public class Main extends AppCompatActivity {
     private ImageView[] startButtons;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
-
     private ProximitySensorManager myProximityManager;
-    private TextToSpeech mySpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,8 +148,9 @@ public class Main extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    HelperMethods.playSound(Main.this, R.raw.click1);
-
+                    if (HelperMethods.turnOnSound(myActivity)) {
+                        HelperMethods.playSound(Main.this, R.raw.click1);
+                    }
                     switch (view.getId()) {
                         case R.id.playButton:
                             startSelectQuiz();

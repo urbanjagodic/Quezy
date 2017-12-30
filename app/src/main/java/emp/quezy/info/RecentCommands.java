@@ -36,7 +36,7 @@ public class RecentCommands extends AppCompatActivity {
         getValues();
         myListView = findViewById(R.id.recentCommandsList);
 
-        myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commands);
+        myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commands);
         myListView.setAdapter(myArrayAdapter);
 
 

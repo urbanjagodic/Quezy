@@ -35,18 +35,21 @@ public class Info extends AppCompatActivity {
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    String about = getString(R.string.about);
-                    HelperMethods.createDialog(myActivity, "About", about, "OK", "", new DialogReturnCommand() {
-                        @Override
-                        public void finishIt() {
-                            // nothing
-                        }
-                    });
-                } else if (i == 1) {
-                    openRecentCommands();
-                } else if (i == 2) {
-                    openHighScore();
+
+                switch (i) {
+                    case 0:
+                        String about = getString(R.string.about);
+                        HelperMethods.createDialog(myActivity, "About", about, "OK", "", new DialogReturnCommand() {
+                            @Override
+                            public void finishIt() { /* nothing */ }
+                        });
+                        break;
+                    case 1:
+                        openRecentCommands();
+                        break;
+                    case 2:
+                        openHighScore();
+                        break;
                 }
             }
         });

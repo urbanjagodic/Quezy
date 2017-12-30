@@ -1,12 +1,10 @@
 package emp.quezy.other;
 
-import android.support.v7.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import emp.quezy.R;
@@ -29,14 +27,14 @@ public class SplashScreen extends AppCompatActivity {
         };
 
 
-        new CountDownTimer(7000, 300) {
+        new CountDownTimer(6000, 300) {
 
             public void onTick(long millisUntilFinished) {
 
                 if (index >= circles.length) {
                     index = 0;
                 }
-                Log.d("tick", millisUntilFinished + "");
+                //Log.d("tick", millisUntilFinished + "");
                 for (int i = 0; i < circles.length; i++) {
                     if (i == index) {
                         continue;

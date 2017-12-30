@@ -19,7 +19,6 @@ public class ContentStore {
 
         myPrefs = myActivity.getApplicationContext().getSharedPreferences(prefsName, Context.MODE_PRIVATE);
         myEditor = myPrefs.edit();
-
     }
 
     public static SharedPreferences getMyPrefrences() {

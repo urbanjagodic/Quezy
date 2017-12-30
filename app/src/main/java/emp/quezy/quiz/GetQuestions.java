@@ -105,7 +105,8 @@ public class GetQuestions extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    HelperMethods.createDialog(GetQuestions.this, "Error", "Ups, this category doesn't have enough questions. Chose a different category or difficulty.",
+                    HelperMethods.createDialog(GetQuestions.this, "Error", "Ups, this category doesn't have enough questions." +
+                                    " Choose a different category or difficulty.",
                             "Ok", "", new DialogReturnCommand() {
                                 @Override
                                 public void finishIt() {

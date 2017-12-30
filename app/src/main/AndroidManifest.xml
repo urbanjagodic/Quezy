@@ -42,6 +42,7 @@
         <activity android:name=".quiz.PlayQuiz" />
         <activity android:name=".settings.Settings" />
         <activity android:name=".settings.VoiceControl" />
+        <activity android:name=".settings.SoundControl" />
         <activity android:name=".info.Info" />
         <activity
             android:name=".info.RecentCommands"

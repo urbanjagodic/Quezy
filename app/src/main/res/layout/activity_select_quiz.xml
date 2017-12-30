@@ -170,6 +170,7 @@
                     android:layout_height="60dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:soundEffectsEnabled="false"
                     app:srcCompat="@drawable/playquizbutton2"/>
 
                 <TextView

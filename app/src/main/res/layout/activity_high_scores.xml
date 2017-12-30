@@ -51,5 +51,5 @@
     <ListView
         android:id="@+id/high_score_listView"
         android:layout_width="match_parent"
-        android:layout_height="464dp" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

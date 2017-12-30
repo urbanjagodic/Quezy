@@ -13,6 +13,7 @@
         android:layout_weight="1"
         android:background="@drawable/answerbackground"
         android:fontFamily="monospace"
+        android:soundEffectsEnabled="false"
         android:padding="15dp"
         android:text="Populated question"
         android:textColor="@color/splash_screen_circle"

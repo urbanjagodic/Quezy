@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +14,7 @@ import java.util.Date;
 import emp.quezy.R;
 import emp.quezy.helper.DatabaseConnector;
 import emp.quezy.info.HighScores;
+import emp.quezy.other.MyAnimation;
 
 public class EndScreen extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,8 +28,9 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
     TextView scoreText;
     TextView overallPointsText;
     ImageView scoreImage;
-    Button playAgainBtn;
-    Button showHighScore;
+    ImageView playAgainBtn;
+    ImageView showHighScore;
+    ViewGroup wholeLayout;
 
 
     @Override
@@ -39,6 +41,8 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         initialize();
         insertScore();
         setTexts();
+
+        new MyAnimation().fadeIn(wholeLayout, EndScreen.this, R.anim.fade_in);
 
         playAgainBtn.setOnClickListener(this);
         showHighScore.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +88,7 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         playAgainBtn = findViewById(R.id.endScreenPlayAgain);
         showHighScore = findViewById(R.id.endScreenHighScore);
         scoreImage = findViewById(R.id.scoreImage);
+        wholeLayout = findViewById(R.id.endScreenLayout);
 
         Bundle bnd = getIntent().getExtras();
         if (bnd != null) {

@@ -135,6 +135,9 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                     QuestionAdapter.setToGreen(position);
                     numCorrect++;
                     overAllPoints += difficultyMultiplier;
+                    if (HelperMethods.turnOnSound(PlayQuiz.this)) {
+                        HelperMethods.playSound(PlayQuiz.this, R.raw.correct_answer_sound);
+                    }
                 }
             });
         }
@@ -149,6 +152,9 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                         }
                     }
                     QuestionAdapter.setToRedAndGreen(position, rightItemPosition);
+                    if (HelperMethods.turnOnSound(PlayQuiz.this)) {
+                    }
+                    HelperMethods.playSound(PlayQuiz.this, R.raw.wrong_answer_sound);
                 }
             });
         }
@@ -162,7 +168,6 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
             numQuestionLeftText.setTextColor(getResources().getColor(R.color.listitemfalse));
         }
         numQuestionLeftText.setText(questions.size() == qNumber ? "" : updatedString);
-
         currentScoreText.setText(getResources().getString(R.string.currentscoretext) + " " + overAllPoints);
     }
 
@@ -188,7 +193,7 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
                     slideAnim();
                 }
             }
-        }, 1600);
+        }, 1800);
     }
 
     private void finishGame() {

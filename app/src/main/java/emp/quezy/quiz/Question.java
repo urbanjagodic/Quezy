@@ -27,7 +27,6 @@ public class Question implements Parcelable{
     }
 
 
-
     protected Question(Parcel in) {
         QuestionText = in.readString();
         rightAnswer = in.readString();

@@ -26,12 +26,11 @@ public class Settings extends AppCompatActivity {
         myListView = findViewById(R.id.settingsList);
 
 
-        String[] values = { "Voice control", "Sound", "Save highscore to external storage"};
+        String[] values = { "Voice control", "Sound", "Save highscore to internal storage"};
 
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, values);
         myListView.setAdapter(myArrayAdapter);
         adapterOnSelected(myListView);
-
     }
 
 
@@ -42,8 +41,13 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (i == 0) {
-                    openVoiceControlActivity();
+                switch (i) {
+                    case 0:
+                        openVoiceControlActivity();
+                        break;
+                    case 1:
+                        openSoundControlActivity();
+                        break;
                 }
 
             }
@@ -54,6 +58,10 @@ public class Settings extends AppCompatActivity {
 
     public void openVoiceControlActivity() {
         Intent myIntent = new Intent(myActivity, VoiceControl.class);
+        startActivity(myIntent);
+    }
+    public void openSoundControlActivity() {
+        Intent myIntent = new Intent(myActivity, SoundControl.class);
         startActivity(myIntent);
     }
 }
