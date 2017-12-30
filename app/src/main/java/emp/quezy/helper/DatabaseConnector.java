@@ -70,11 +70,11 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 null, null,null,C_Score + " DESC",null);
     }
 
-    public Cursor getTopGames(int num){
+    public Cursor getTopGames(int num, String direction, String orderByColumn){
         String [] cols = new String[]{C_ID, C_Category, C_Difficulty, C_Score, C_Date};
         return database.query(TABLE_NAME, cols,
                 null, null, null,null,
-                C_Score + " DESC",num +"");
+                orderByColumn + " " +  direction, " " + num);
     }
 
 }

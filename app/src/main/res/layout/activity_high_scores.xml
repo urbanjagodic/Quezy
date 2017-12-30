@@ -17,7 +17,7 @@
         android:paddingTop="10dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/categoryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,7 +27,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/difficultyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/scoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
