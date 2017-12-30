@@ -31,9 +31,9 @@ public class Main extends AppCompatActivity {
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
 
-
     private ProximitySensorManager myProximityManager;
     private TextToSpeech mySpeech;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +61,13 @@ public class Main extends AppCompatActivity {
         Object enableVoiceControl = myPrefs.getBoolean("voiceControl", false);
 
         if (enableVoiceControl != null) {
-            if ((boolean)enableVoiceControl) {
+            if ((boolean) enableVoiceControl) {
                 myProximityManager.register();
-            }
-            else {
+            } else {
                 myProximityManager.unregister();
             }
         }
     }
-
 
     @Override
     protected void onPause() {
@@ -83,14 +81,11 @@ public class Main extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 100 && resultCode == RESULT_OK) {
-
             VoiceCommands.initialize();
-
             String result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
             //HelperMethods.showToast(myActivity, result);
 
             storeVoiceCommandToSharedPrefs(result);
-
 
             if (VoiceCommands.exitCommands.contains(result)) {
                 HelperMethods.killApp(myActivity);
@@ -108,51 +103,49 @@ public class Main extends AppCompatActivity {
     public void onBackPressed() {
         HelperMethods.createDialog(myActivity, "Exit the application", "Are you sure?", "Yes", "No",
                 new DialogReturnCommand() {
-            @Override
-            public void finishIt() {
-                HelperMethods.killApp(myActivity);
-            }
-        });
+                    @Override
+                    public void finishIt() {
+                        HelperMethods.killApp(myActivity);
+                    }
+                });
     }
 
     public void buttonAction() {
         for (ImageView button : startButtons) {
-
             button.setSoundEffectsEnabled(false);
 
             button.setOnTouchListener(new View.OnTouchListener() {
-                                          @Override
-                                          public boolean onTouch(View view, MotionEvent motionEvent) {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        switch (view.getId()) {
+                            case R.id.playButton:
+                                ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
+                                break;
+                            case R.id.settingsButton:
+                                ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
+                                break;
+                            case R.id.infoButton:
+                                ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
+                                break;
+                        }
+                    } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                        switch (view.getId()) {
+                            case R.id.playButton:
+                                ((ImageView) view).setImageResource(R.drawable.play_image);
+                                break;
+                            case R.id.settingsButton:
+                                ((ImageView) view).setImageResource(R.drawable.settings_image);
+                                break;
+                            case R.id.infoButton:
+                                ((ImageView) view).setImageResource(R.drawable.info_image);
+                                break;
+                        }
+                    }
+                    return false;
+                }
 
-                  if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                      switch (view.getId()) {
-                          case R.id.playButton:
-                              ((ImageView) view).setImageResource(R.drawable.play_image_pressed);
-                              break;
-                          case R.id.settingsButton:
-                              ((ImageView) view).setImageResource(R.drawable.settings_image_pressed);
-                              break;
-                          case R.id.infoButton:
-                              ((ImageView) view).setImageResource(R.drawable.info_image_pressed);
-                              break;
-                      }
-                  } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                      switch (view.getId()) {
-                          case R.id.playButton:
-                              ((ImageView) view).setImageResource(R.drawable.play_image);
-                              break;
-                          case R.id.settingsButton:
-                              ((ImageView) view).setImageResource(R.drawable.settings_image);
-                              break;
-                          case R.id.infoButton:
-                              ((ImageView) view).setImageResource(R.drawable.info_image);
-                              break;
-                      }
-                  }
-                  return false;
-              }
-
-          });
+            });
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,10 +174,9 @@ public class Main extends AppCompatActivity {
         if (HelperMethods.checkInternetConnection(myActivity)) {
             final Intent selectQuiz = new Intent(myActivity, SelectQuiz.class);
             startActivity(selectQuiz);
-        }
-        else {
+        } else {
             HelperMethods.createDialog(myActivity, "", "For further use of this application," +
-                    " please connect to the internet!" ,"OK", "", new DialogReturnCommand() {
+                    " please connect to the internet!", "OK", "", new DialogReturnCommand() {
                 @Override
                 public void finishIt() {
                     // nothing
@@ -210,7 +202,6 @@ public class Main extends AppCompatActivity {
     }
 
     public void storeVoiceCommandToSharedPrefs(String voiceCommand) {
-
         ContentStore.initialize(myActivity);
         SharedPreferences myPrefs = ContentStore.getMyPrefrences();
 

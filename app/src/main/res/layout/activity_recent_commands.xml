@@ -18,7 +18,8 @@
         android:layout_marginRight="20dp"
         android:clickable="true"
         app:backgroundTint="@color/splash_screen_text"
-        app:srcCompat="@android:drawable/ic_delete"/>
+        app:srcCompat="@android:drawable/ic_delete"
+        android:layout_alignParentRight="true" />
 
     <ListView
         android:id="@+id/recentCommandsList"

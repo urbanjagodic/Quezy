@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Quezy</string>
+    <string name="about">Quezy is a simple quiz application. It was developed by Urban Jagodic and Simon Korošec.</string>
     <string name="category">Category</string>
     <string name="difficulty">Difficulty</string>
     <string name="numQ">Number of Questions:</string>
     <string name="play">Play</string>
-
 
     <string name="loading_data_text"> Loading data</string>
     <string name="title_activity_recent_commands">RecentCommands</string>

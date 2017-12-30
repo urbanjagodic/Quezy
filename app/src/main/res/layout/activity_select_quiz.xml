@@ -136,7 +136,8 @@
                         android:text="Easy"
                         android:textAlignment="viewStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:typeface="normal"/>
+                        android:typeface="normal"
+                        android:layout_gravity="start" />
 
                     <RadioButton
                         android:id="@+id/mediumButton"

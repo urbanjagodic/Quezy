@@ -24,7 +24,7 @@ public class VoiceControl extends AppCompatActivity {
         setContentView(R.layout.activity_voice_control);
 
 
-        myVoiceSwitch = (Switch) findViewById(R.id.voiceControlSwitch);
+        myVoiceSwitch = findViewById(R.id.voiceControlSwitch);
 
 
         // initialize shared prefs

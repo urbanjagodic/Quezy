@@ -68,8 +68,6 @@ public class HighScores extends AppCompatActivity {
         setClickListenerAndSort(difficultyText, R.string.difficulty, DatabaseConnector.C_Difficulty);
     }
 
-
-
     public void setClickListenerAndSort(final TextView v, final int resource, final String passedString) {
 
         v.setOnClickListener(new View.OnClickListener() {

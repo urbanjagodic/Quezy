@@ -17,11 +17,9 @@ import android.widget.Toast;
 
 public class HelperMethods {
 
-
     public static void showToast(Activity myActivity, String message) {
         Toast.makeText(myActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
-
 
     public static void createDialog(Activity myActivity, String title, String message, String okButton, String cancelButton,
                                     final DialogReturnCommand myCommand) {
@@ -50,13 +48,11 @@ public class HelperMethods {
                 .show();
     }
 
-
     public static void killApp(Activity myActivity) {
         int pid = android.os.Process.myPid();
         android.os.Process.killProcess(pid);
         myActivity.finish();
     }
-
 
     public static void playSound(Activity myActivity, int resource) {
         try {
@@ -67,13 +63,11 @@ public class HelperMethods {
         }
     }
 
-
     public static boolean checkInternetConnection(Activity myActivity) {
         ConnectivityManager connectivityManager = (ConnectivityManager)  myActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
 
     public static String unescapeChars(String input) {
 
@@ -103,5 +97,4 @@ public class HelperMethods {
         }
         return input;
     }
-
 }

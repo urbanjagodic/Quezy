@@ -53,9 +53,8 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
     }
 
     private void setTexts() {
-
         double percent = ((double) numCorrect / (double) numQuestions);
-        if (percent < 0.0){
+        if (percent < 0.0) {
             Log.i("percent_ERR", Double.toString(percent));
         } else if (percent < 0.4) {
             mainText.setText(R.string.bad_score);

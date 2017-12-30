@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
-                android:background="@color/main_background_color"
-                tools:context="emp.quezy.quiz.EndScreen">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/main_background_color"
+    tools:context="emp.quezy.quiz.EndScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,8 +21,8 @@
             android:layout_height="200dp"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/notbad"
-            android:contentDescription="@string/end_score_img" />
+            android:contentDescription="@string/end_score_img"
+            app:srcCompat="@drawable/notbad" />
 
         <TextView
             android:id="@+id/mainText"
@@ -34,7 +34,7 @@
             android:gravity="center_horizontal"
             android:text="@string/congratulations"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
 
         <TextView
@@ -47,7 +47,7 @@
             android:gravity="center_horizontal"
             android:text="@string/score_cor_num"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
 
         <TextView
@@ -57,17 +57,17 @@
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
             android:gravity="center_horizontal"
             android:text="@string/overallpointstext"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            android:layout_marginRight="10dp" />
+            android:textStyle="bold" />
 
-        <RelativeLayout android:id="@+id/RelativeLayout01"
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/endScreenPlayAgain"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/play_again"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/endScreenHighScore"

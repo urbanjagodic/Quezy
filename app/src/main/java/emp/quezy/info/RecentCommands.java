@@ -34,7 +34,7 @@ public class RecentCommands extends AppCompatActivity {
         setContentView(R.layout.activity_recent_commands);
 
         getValues();
-        myListView = (ListView) findViewById(R.id.recentCommandsList);
+        myListView = findViewById(R.id.recentCommandsList);
 
         myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, commands);
         myListView.setAdapter(myArrayAdapter);
@@ -50,7 +50,7 @@ public class RecentCommands extends AppCompatActivity {
             }
         });
 
-        clearCommandsButton = (FloatingActionButton) findViewById(R.id.clearCommandsButton);
+        clearCommandsButton = findViewById(R.id.clearCommandsButton);
 
         clearCommandsButton.setOnClickListener(new View.OnClickListener() {
             @Override

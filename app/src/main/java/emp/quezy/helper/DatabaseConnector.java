@@ -64,17 +64,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         close();
     }
 
-    public Cursor getScoreFromCategory(String category){
-        String [] cols = new String[]{C_Date, C_Category, C_Difficulty, C_Score};
+    public Cursor getScoreFromCategory(String category) {
+        String[] cols = new String[]{C_Date, C_Category, C_Difficulty, C_Score};
         return database.query(TABLE_NAME, cols, C_Category + "=" + category,
-                null, null,null,C_Score + " DESC",null);
+                null, null, null, C_Score + " DESC", null);
     }
 
-    public Cursor getTopGames(int num, String direction, String orderByColumn){
-        String [] cols = new String[]{C_ID, C_Category, C_Difficulty, C_Score, C_Date};
+    public Cursor getTopGames(int num, String direction, String orderByColumn) {
+        String[] cols = new String[]{C_ID, C_Category, C_Difficulty, C_Score, C_Date};
         return database.query(TABLE_NAME, cols,
-                null, null, null,null,
-                orderByColumn + " " +  direction, " " + num);
+                null, null, null, null,
+                orderByColumn + " " + direction, " " + num);
     }
 
 }

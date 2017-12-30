@@ -23,7 +23,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        myListView = (ListView) findViewById(R.id.settingsList);
+        myListView = findViewById(R.id.settingsList);
 
 
         String[] values = { "Voice control", "Sound", "Save highscore to external storage"};
