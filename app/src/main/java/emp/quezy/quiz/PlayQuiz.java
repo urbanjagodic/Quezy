@@ -21,17 +21,6 @@ import emp.quezy.helper.DialogReturnCommand;
 import emp.quezy.helper.HelperMethods;
 import emp.quezy.other.MyAnimation;
 
-// TODO When over display score (?? new activity ??)
-// TODO Save score into database upon completion
-
-/**
- * TODO bom kr pisu p slovenk kwa morva še nardit , zdej to dela za praviln pa napačn odogovr,
- * TODO magar bom jst še naredu jutr da ti sešteva točke gled na zahtevnost pa ramzmislam
- * TODO ce bi se naredu en timer za da ma sam 15 sekund na voljo da odgoovri,
- * TODO ti pa lohk SQL database se lotš če maš cajt
- *
- * TODO evo to je blo po slovensk ostalo commenti pa use je nazaj u anglesčini :D
- */
 
 public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -229,6 +218,6 @@ public class PlayQuiz extends AppCompatActivity implements AdapterView.OnItemCli
     }
 
     private void slideAnim() {
-        new MyAnimation().slideFromRight(coreLayout, PlayQuiz.this, R.anim.slide_from_right);
+        new MyAnimation().randomAnim(coreLayout, PlayQuiz.this, R.anim.slide_from_right);
     }
 }

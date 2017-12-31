@@ -12,7 +12,7 @@
     <color name="main_background_color">#80bfff</color>
     <color name="startup_icon_color">#990e0e</color>
 
-    <color name="progress_bar_color"> #ffffff</color>
+    <color name="progress_bar_color">#e4e4e4</color>
 
     <color name="selectQuizbackground">#4da6ff</color>
     <color name="selectQuizbackgrounditem">#3399ff</color>
@@ -22,4 +22,5 @@
 
     <color name="goodtext"> #f9c004</color>
     <color name="greattext"> #06cc09</color>
+    <color name="customdialogbackground">#2c2c2c</color>
 </resources>

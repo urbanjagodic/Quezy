@@ -26,7 +26,7 @@ public class Settings extends AppCompatActivity {
         myListView = findViewById(R.id.settingsList);
 
 
-        String[] values = { "Voice control", "Sound", "Save highscore to internal storage"};
+        String[] values = { "Voice control", "Sound"};
 
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, values);
         myListView.setAdapter(myArrayAdapter);

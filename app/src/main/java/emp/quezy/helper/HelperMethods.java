@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import emp.quezy.other.ContentStore;
 
 /**
@@ -104,5 +106,9 @@ public class HelperMethods extends AppCompatActivity {
         ContentStore.initialize(myActivity);
         SharedPreferences myPrefs = ContentStore.getMyPrefrences();
         return myPrefs.getBoolean("soundControl", false);
+    }
+
+    public static int randomPosition(int num) {
+        return new Random().nextInt(num);
     }
 }

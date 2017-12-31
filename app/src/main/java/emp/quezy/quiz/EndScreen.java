@@ -42,7 +42,7 @@ public class EndScreen extends AppCompatActivity implements View.OnClickListener
         insertScore();
         setTexts();
 
-        new MyAnimation().fadeIn(wholeLayout, EndScreen.this, R.anim.fade_in);
+        new MyAnimation().randomAnim(wholeLayout, EndScreen.this, R.anim.fade_in);
 
         playAgainBtn.setOnClickListener(this);
         showHighScore.setOnClickListener(new View.OnClickListener() {

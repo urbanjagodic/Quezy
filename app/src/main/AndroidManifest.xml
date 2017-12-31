@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.sensor.proximity"
@@ -38,8 +40,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".quiz.SelectQuiz" />
-        <activity android:name=".quiz.PlayQuiz" />
+        <activity android:name=".quiz.SelectQuiz"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".quiz.PlayQuiz"
+            android:screenOrientation="portrait"/>
         <activity android:name=".settings.Settings" />
         <activity android:name=".settings.VoiceControl" />
         <activity android:name=".settings.SoundControl" />
@@ -49,8 +53,10 @@
             android:label="@string/title_activity_recent_commands"
             android:theme="@style/AppTheme" />
         <activity android:name=".quiz.GetQuestions" />
-        <activity android:name=".quiz.EndScreen" />
-        <activity android:name=".info.HighScores"></activity>
+        <activity android:name=".quiz.EndScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".info.HighScores"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

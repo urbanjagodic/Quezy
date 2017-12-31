@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -27,6 +28,8 @@ import emp.quezy.settings.Settings;
 public class Main extends AppCompatActivity {
 
     private ImageView[] startButtons;
+    private int[] animations;
+    private TextView quezyTitle;
     private String TAG = getClass().getSimpleName().toLowerCase();
     private Activity myActivity = Main.this;
     private ProximitySensorManager myProximityManager;
@@ -39,8 +42,12 @@ public class Main extends AppCompatActivity {
         startButtons = new ImageView[]{
                 findViewById(R.id.playButton), findViewById(R.id.settingsButton), findViewById(R.id.infoButton)
         };
+        animations = new int[]{
+                R.anim.bounce, R.anim.rotate, R.anim.squeze, R.anim.title_slide_from_left, R.anim.title_slide_from_right};
 
+        quezyTitle = findViewById(R.id.quezyTitle);
         animateButtons();
+        animateTitle();
         buttonAction();
 
         // initialize myproximity manager
@@ -64,6 +71,7 @@ public class Main extends AppCompatActivity {
                 myProximityManager.unregister();
             }
         }
+        animateTitle();
     }
 
     @Override
@@ -195,8 +203,12 @@ public class Main extends AppCompatActivity {
 
     public void animateButtons() {
         for (ImageView button : startButtons) {
-            new MyAnimation().fadeIn(button, myActivity, R.anim.fade_in);
+            new MyAnimation().randomAnim(button, myActivity, R.anim.fade_in);
         }
+    }
+
+    public void animateTitle() {
+        new MyAnimation().randomAnim(quezyTitle, myActivity, animations[HelperMethods.randomPosition(5)]);
     }
 
     public void storeVoiceCommandToSharedPrefs(String voiceCommand) {

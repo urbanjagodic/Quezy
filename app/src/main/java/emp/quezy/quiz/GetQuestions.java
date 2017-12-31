@@ -23,10 +23,11 @@ import emp.quezy.helper.HelperMethods;
 
 public class GetQuestions extends AppCompatActivity {
 
-    ArrayList<Question> questions;        // Kle v temu listu so vsa vprašanja
+    ArrayList<Question> questions;        // questions
+    private static final String TAG = GetQuestions.class.getSimpleName();
     JSONObject jsonObject;
-    static String dif;
-    static String categoryString;
+    private static String dif;
+    private static String categoryString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,7 @@ public class GetQuestions extends AppCompatActivity {
         if (intent != null) {
             url = getURL(intent.getExtras());
         }
-
         new ReadJSON().execute(url);
-
     }
 
     public static String getURL(Bundle bnd) {
@@ -93,7 +92,7 @@ public class GetQuestions extends AppCompatActivity {
             try {
                 jsonObject = new JSONObject(s);
                 int response = parseJSON(jsonObject);
-                Log.i("response_return", Integer.toString(response));
+                Log.i(TAG, Integer.toString(response));
                 if (response == 0) {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("emp.quezy.questionsList", questions);
@@ -128,7 +127,7 @@ public class GetQuestions extends AppCompatActivity {
         try {
             response = jObj.getInt("response_code");
             if (response != 0) {
-                Log.i("response_code", Integer.toString(response));
+                Log.d(TAG, Integer.toString(response));
             } else {
                 JSONArray jsonArray = jObj.getJSONArray("results");
 

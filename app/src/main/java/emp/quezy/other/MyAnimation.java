@@ -12,21 +12,10 @@ import android.view.animation.AnimationUtils;
 public class MyAnimation implements AnimationInterface {
 
     @Override
-    public void fadeIn(View v, Context context, int resource) {
+    public void randomAnim(View v, Context context, int resource) {
         Animation fadeInAnim = AnimationUtils.loadAnimation(context, resource);
         v.startAnimation(fadeInAnim);
 
     }
 
-    @Override
-    public void fadeOut(View v, Context context, int resource) {
-        Animation fadeOutAnim = AnimationUtils.loadAnimation(context, resource);
-        v.startAnimation(fadeOutAnim);
-    }
-
-    @Override
-    public void slideFromRight(View v, Context context, int resource) {
-        Animation fadeInAnim = AnimationUtils.loadAnimation(context, resource);
-        v.startAnimation(fadeInAnim);
-    }
 }
